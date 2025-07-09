@@ -5,28 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meus Contatos</title>
 </head>
+
+<style>
+    :root {
+            /* fonte e tipografia */
+            --titulo: "Poppins", sans serif;
+            --texto: "Inter", sans serif;
+            --script:"Dancing Script",cursive;
+            --superGrande-font-size: 1.5rem;
+            --grande-font-size: 1.rem;
+            --normal-font-size: .875rem;
+            --small-font-size: .699rem;
+            --superSmall-font-size: 0.660rem;
+
+
+            --azul: #0C5DF4;
+            --azul-suave: #3498db;
+            --azul-escuro: #00214d;
+            --azul-fusco: #1b2d45;
+            --fundo-claro: #ccc;
+            --branco: #FFFFFF;
+            --amarelo: #fde24f;
+            --verde-escuro: #43A047;
+            --verde-claro: #2ecc71;
+            --vermelho: #e74c3c;
+            --cinza-escuro: #333;
+            --preto: #1A1A1A;
+
+        }
+
+        table{
+            & thead{
+                & tr{
+                    font-size: var(--normal-font-size); 
+                    color: var(--azul)!important;
+                }
+            }
+            & tbody{
+                & td{font-size: var(--small-font-size); font-weight: 700; color: var(--azul);}
+            }
+        }
+
+
+</style>
+
+
 <body>
-    
-    <h1 class="teste1">Meus Contatos </h1>
-    <table>
+    <table class="table table-hover table-sm">
         <thead>
-            <tr>
-                <td>teste 1</td>
-                <td>teste 2</td>
-                <td>teste 3</td>
-            </tr>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Tag</th>
+            <th scope="col">Morada</th>
+            <th scope="col">Criado em</th>
+          </tr>
         </thead>
         <tbody>
-            <td>teste 1</td>
-                <td>teste 2</td>
-                <td>teste 3</td>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>Jacob</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Jacob</td>
+            <td>John</td>
+            <td>Doe</td>
+            <td>@social</td>
+          </tr>
         </tbody>
-        <tfoot>
-            <td>teste 1</td>
-                <td>teste 2</td>
-                <td>teste 3</td>
-        </tfoot>
-    </table>
+      </table>
 
 
 
