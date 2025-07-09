@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar conta</title>
+</head>
+<body>
+
+    <section>
+        <div id="alert-login" class="erro sucesso"></div>
+        <div class="form-Box">
+            <h1>Criar uma conta</h1>
+            <form action="../backend/validar_registo.php" method="post" id="form-registo">
+                <label for="nome">Nome completo*</label>
+                <input type="text" name="nome" id="nome" placeholder="Insira o seu nome completo" aria-autocomplete="none" required>
+                <span id="alert-nome" class="erro"></span>
+
+                <label for="email">Email*</label>
+                <input type="email" name="email" id="email" placeholder="Insira o seu email" aria-autocomplete="on" required>
+                <span id="alert-email" class="erro"></span>
+
+                <label for="senha">Senha*</label>
+                <input type="password" name="senha" id="senha" placeholder="Insira a sua senha" aria-autocomplete="none" >
+                <span id="alert-senha" class="erro"></span>
+
+                <label for="telefone">Telefone (opcional)</label>
+                <input type="text" name="telefone" id="telefone" placeholder="+2449xxxxxxx" aria-autocomplete="none" >
+                <span id="alert-global" class="erro"></span>
+
+                <div id="progress-container" style="display:none;">
+                    <div id="progress-bar"></div>
+                </div>
+
+                <button name="submit" class="btn-submit">Criar conta</button>
+            </form>
+            <p class="entrar">Já tem uma conta? <a onclick="login_form()">Iniciar</a></p>
+        </div>
+    </section>
+    
+
+    
+
+        <script>
+            // document.querySelector('form').addEventListener('submit', function (e) {
+            
+            // // Limpar mensagens de erro anteriores
+            //     document.querySelectorAll('.erro').forEach(function (alert) {
+            //         alert.style.display = 'none'; // Esconder mensagens de erro
+            //         alert.textContent = ''; // Limpar o texto da mensagem de erro
+            //     });
+            //     let alert= document.getElementById('alert-nome')
+            //     if( document.getElementById('nome').value.length < 3){
+            //         alert.textContent = 'Preencha seu nome completo.';
+            //         alert.style.display = 'block'; // Mostrar a mensagem de erro
+            //         alert.classList.add('erro');
+            //         e.preventDefault();
+                    
+            //     }
+            //     let alert_senha= document.getElementById('alert-senha')
+            //     if( document.getElementById('senha').value.length < 6){
+            //         alert_senha.textContent = 'A senha deve ter pelo menos 6 caracteres.';
+            //         alert_senha.style.display = 'block'; // Mostrar a mensagem de erro
+            //         alert_senha.classList.add('erro');
+            //         e.preventDefault();
+                    
+            //     }
+
+            
+            // });
+
+
+        </script>
+</body>
+</html>

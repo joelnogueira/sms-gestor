@@ -1,0 +1,637 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+    <title>Sidebar template</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+ 
+    <link rel="stylesheet" href="../css/sidebar.css">
+</head>
+    
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        /*Fonte Dancing Script*/
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+
+        :root {
+            --titulo: "Poppins", sans serif;
+            --texto: "Inter", sans serif;
+            --azul: #1E88E5;
+            --fundo-claro: #F5F5F5;
+            --branco: #FFFFFe;
+            --preto: #1A1A1A;
+            --botao: #00214d;
+            --azul-escuro: #1b2d45;
+            --amarelo: #fde24f;
+            --verde-sucesso: #43A047;
+
+            --Azul-suave: #3498db;
+            /* cor primária (botões, links, destaques) */
+            --verde: #2ecc71;
+            --cinza-escuro: #333;
+            /* cartões e áreas de conteúdo */
+            --vermelho: #e74c3c;
+            /*para alertas ou ações perigosas (como excluir) */
+
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--texto);
+        }
+
+        body {
+            background-image: url(assets/blurry-gradient-haikei-painel.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            font-size:0.9rem;
+            padding:5px 5px;
+        }
+
+        main {
+            overflow: auto;
+            width: 100%;
+            max-width: 1400px;
+            height: 80dvh;
+            margin: 0 auto;
+            border-radius: 25px;
+            border: 2px solid whitesmoke;
+            
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(23px);
+            -webkit-backdrop-filter: blur(23px);
+        }
+
+        .loading {
+            display: none;
+        }
+
+        .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            text-align: center;
+            display: block;
+            transition: all .5s ease;
+        }
+
+        .spinner>div {
+            width: 15px;
+            height: 15px;
+            background-color: blue;
+
+            border-radius: 100%;
+            display: inline-block;
+            -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+            animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        }
+
+        .spinner .bounce1 {
+            -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s;
+        }
+
+        .spinner .bounce2 {
+            -webkit-animation-delay: -0.16s;
+            animation-delay: -0.16s;
+        }
+
+        @-webkit-keyframes sk-bouncedelay {
+
+            0%,
+            80%,
+            100% {
+                -webkit-transform: scale(0)
+            }
+
+            40% {
+                -webkit-transform: scale(1.0)
+            }
+        }
+
+        @keyframes sk-bouncedelay {
+
+            0%,
+            80%,
+            100% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+
+            40% {
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(2px);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            animation: aparecer 0.3s ease;
+
+            & h2 {
+                font-size: 18px;
+                margin-bottom: 15px;
+                font-family: var(--titulo);
+            }
+
+            & p {
+                font-size: 12px;
+                margin-bottom: 20px;
+                color: #ccc;
+            }
+        }
+
+        .modal-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .modal-actions button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-family: var(--texto);
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #cancelar {
+            background-color: #ddd;
+        }
+
+        #confirmar {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        #cancelar:hover {
+            background-color: #ccc;
+        }
+
+        #confirmar:hover {
+            background-color: #c0392b;
+        }
+
+        @keyframes aparecer {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+
+        nav {
+            position: sticky;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px;
+            padding-left: 30px;
+            padding-right: 30px;
+            margin-bottom: 5px;
+            font-family: var(--texto);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 42px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(23px);
+            -webkit-backdrop-filter: blur(23px);
+
+            & .logo {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-right: 20px;
+                color: #fff;
+
+                & img {
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+
+                & h5 {
+                    font-size: .7rem;
+                    font-weight: 700;
+
+                    & span {
+                        font-weight: 200;
+                    }
+                }
+            }
+        }
+
+        .btnBox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--titulo);
+            font-size: 13px;
+            margin-right:20px;
+
+            & #inicio {
+                padding: 3px 10px;
+                border-radius: 5px;
+                background-color: var(--Azul-suave);
+                color: var(--branco);
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+
+            & #tema {
+                padding: 3px 10px;
+                border-radius: 5px;
+                background-color: var(--azul-escuro);
+                color: var(--branco);
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+
+        }
+
+</style>
+
+<body>
+  
+<div class="loading">
+
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+
+    
+        <nav >
+            <div class="logo">
+                <a href="../index.html"><img src="assets/logo-sms.jpg" alt="sms-gestor"></a>
+                <h5>SMS<span>GESTOR</span></h5>
+            </div>
+            <div class="btnBox">
+                <div id="inicio" onclick="window.location.href='../index.html'">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+                <div id="tema" onclick="mudar_tema()">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+            </div>
+        </nav>
+    <main>
+        <div class="page-wrapper chiller-theme toggled">
+    
+            <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+                <i class="fas fa-bars"></i>
+              </a>
+              <nav id="sidebar" class="sidebar-wrapper">
+                <div class="sidebar-content">
+                  <div class="sidebar-brand">
+                    <a href="#">pro sidebar</a>
+                    <div id="close-sidebar">
+                      <i class="fas fa-times"></i>
+                    </div>
+                  </div>
+                  <div class="sidebar-header">
+                    <div class="user-pic">
+                      <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                        alt="User picture">
+                    </div>
+                    <div class="user-info">
+                      <span class="user-name">Jhon
+                        <strong>Smith</strong>
+                      </span>
+                      <span class="user-role">Administrator</span>
+                      <span class="user-status">
+                        <i class="fa fa-circle"></i>
+                        <span>Online</span>
+                      </span>
+                    </div>
+                  </div>
+                  <!-- sidebar-header  -->
+                  <div class="sidebar-search">
+                    <div>
+                      <div class="input-group">
+                        <input type="text" class="form-control search-menu" placeholder="Search...">
+                        <div class="input-group-append">
+                          <span class="input-group-text">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- sidebar-search  -->
+                  <div class="sidebar-menu">
+                    <ul>
+                      <li class="header-menu">
+                        <span>General</span>
+                      </li>
+                      <li class="sidebar-dropdown">
+                        <a href="#">
+                          <i class="fa fa-tachometer-alt"></i>
+                          <span>Dashboard</span>
+                          <span class="badge badge-pill badge-warning">New</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                          <ul>
+                            <li>
+                              <a href="#">Dashboard 1
+                                <span class="badge badge-pill badge-success">Pro</span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">Dashboard 2</a>
+                            </li>
+                            <li>
+                              <a href="#">Dashboard 3</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="sidebar-dropdown">
+                        <a href="#">
+                          <i class="fa fa-shopping-cart"></i>
+                          <span>E-commerce</span>
+                          <span class="badge badge-pill badge-danger">3</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                          <ul>
+                            <li>
+                              <a href="#">Products
+            
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">Orders</a>
+                            </li>
+                            <li>
+                              <a href="#">Credit cart</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="sidebar-dropdown">
+                        <a href="#">
+                          <i class="far fa-gem"></i>
+                          <span>Components</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                          <ul>
+                            <li>
+                              <a href="#">General</a>
+                            </li>
+                            <li>
+                              <a href="#">Panels</a>
+                            </li>
+                            <li>
+                              <a href="#">Tables</a>
+                            </li>
+                            <li>
+                              <a href="#">Icons</a>
+                            </li>
+                            <li>
+                              <a href="#">Forms</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="sidebar-dropdown">
+                        <a href="#">
+                          <i class="fa fa-chart-line"></i>
+                          <span>Charts</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                          <ul>
+                            <li>
+                              <a href="#">Pie chart</a>
+                            </li>
+                            <li>
+                              <a href="#">Line chart</a>
+                            </li>
+                            <li>
+                              <a href="#">Bar chart</a>
+                            </li>
+                            <li>
+                              <a href="#">Histogram</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="sidebar-dropdown">
+                        <a href="#">
+                          <i class="fa fa-globe"></i>
+                          <span>Maps</span>
+                        </a>
+                        <div class="sidebar-submenu">
+                          <ul>
+                            <li>
+                              <a href="#">Google maps</a>
+                            </li>
+                            <li>
+                              <a href="#">Open street map</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li class="header-menu">
+                        <span>Extra</span>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-book"></i>
+                          <span>Documentation</span>
+                          <span class="badge badge-pill badge-primary">Beta</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-calendar"></i>
+                          <span>Calendar</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          <i class="fa fa-folder"></i>
+                          <span>Examples</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- sidebar-menu  -->
+                </div>
+                <!-- sidebar-content  -->
+                <div class="sidebar-footer">
+                  <a href="#">
+                    <i class="fa fa-bell"></i>
+                    <span class="badge badge-pill badge-warning notification">3</span>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-envelope"></i>
+                    <span class="badge badge-pill badge-success notification">7</span>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-cog"></i>
+                    <span class="badge-sonar"></span>
+                  </a>
+                  <a href="#">
+                    <i class="fa fa-power-off"></i>
+                  </a>
+                </div>
+              </nav>
+              <!-- sidebar-wrapper  -->
+    
+            
+        
+        
+    
+            <section class="page-content">
+                <h2>Testando</h2>
+    
+            </section>
+        </div>
+    </main>
+
+</div>
+    
+
+<!-- page-wrapper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    
+<script>
+        jQuery(function ($) {
+
+        $(".sidebar-dropdown > a").click(function() {
+        $(".sidebar-submenu").slideUp(200);
+        if (
+        $(this)
+        .parent()
+        .hasClass("active")
+        ) {
+        $(".sidebar-dropdown").removeClass("active");
+        $(this)
+        .parent()
+        .removeClass("active");
+        } else {
+        $(".sidebar-dropdown").removeClass("active");
+        $(this)
+        .next(".sidebar-submenu")
+        .slideDown(200);
+        $(this)
+        .parent()
+        .addClass("active");
+        }
+        });
+
+        $("#close-sidebar").click(function() {
+        $(".page-wrapper").removeClass("toggled");
+        });
+        $("#show-sidebar").click(function() {
+        $(".page-wrapper").addClass("toggled");
+        });
+
+
+
+
+        });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const intervalo = setInterval(() => {
+            // Simula o carregamento do conteúdo
+            document.querySelector('.spinner').style.display = 'none';
+            document.querySelector('.loading').style.display = 'block'; // Exibir o conteúdo principal
+
+        }, 3000);
+
+    })
+
+
+    document.getElementById("btn-sair").addEventListener("click", function(e) {
+        e.preventDefault();
+        document.getElementById("modal").style.display = "flex";
+    });
+
+    document.getElementById("cancelar").addEventListener("click", function() {
+        document.getElementById("modal").style.display = "none";
+    });
+
+    document.getElementById("confirmar").addEventListener("click", function() {
+        // Redireciona para o PHP de logout
+        window.location.href = "../backend/terminar_sessao.php";
+    });
+</script>
+
+<!--Bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+
+<!-- Icon FontAwesome -->
+<script src="https://kit.fontawesome.com/3f04aa5ab1.js" crossorigin="anonymous"></script>
+
+
+
+</body>
+
+</html>

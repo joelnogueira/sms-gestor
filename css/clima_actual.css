@@ -1,0 +1,79 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/*Fonte Dancing Script*/
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+
+:root {
+    /* fonte e tipografia */
+    --titulo: "Poppins", sans serif;
+    --texto: "Inter", sans serif;
+    --script:"Dancing Script",cursive;
+    --superGrande-font-size: 1.5rem;
+    --grande-font-size: 1.rem;
+    --normal-font-size: .875rem;
+    --small-font-size: .699rem;
+    --superSmall-font-size: 0.660rem;
+
+
+    --azul: #0C5DF4;
+    --azul-suave: #3498db;
+    --azul-escuro: #00214d;
+    --azul-fusco: #1b2d45;
+    --fundo-claro: #ccc;
+    --branco: #FFFFFF;
+    --amarelo: #fde24f;
+    --verde-escuro: #43A047;
+    --verde-claro: #2ecc71;
+    --vermelho: #e74c3c;
+    --cinza-escuro: #333;
+    --preto: #1A1A1A;
+
+}
+
+
+
+
+
+
+.clima-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 13px;
+    width: 300px;
+    font-family:var(--titulo);
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
+    border-left: 6px solid #007bff;
+    transition: 0.2s ease;
+  }
+  .clima-card:hover {
+    transform: scale(1.02);
+  } 
+  .cidade {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+  .descricao {
+    text-transform: capitalize;
+    font-size: 0.8rem;
+    margin: 5px 0;
+    color: #555;
+  }
+  .temperatura {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+  .detalhes {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    font-size: 0.65rem;
+  }
+  .detalhes i {
+    color: #007bff;
+    margin-right: 6px;
+  }

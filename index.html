@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Gestor - Gestor de SMS e Contatos</title>
+
+    
+    <!--Biblioteca Animate css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/index.css">
+</head>
+    
+<style>
+
+:root{
+    --titulo:"Poppins", sans serif;
+    --texto:"Inter", sans serif;
+    --azul:#1E88E5;
+    --fundo-claro:#F5F5F5;
+    --branco:#FFFFFe;
+    --preto:#1A1A1A;
+    --botao:#00214d;
+    --azul-escuro:#1b2d45;
+    --amarelo:#fde24f;
+    --verde-sucesso:#43A047;
+    
+}
+html{
+    scroll-behavior: smooth;
+}
+.section2{
+    width: 90%;
+    max-width: 1200px;
+    height:auto;
+    margin: 10px auto;
+    margin-bottom: 0px;
+    padding: 40px 30px;
+    border-radius:3px 3px 0px 0px;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 23px );
+    -webkit-backdrop-filter: blur( 23px );
+
+    & .titulo{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 800px ;
+        & h1{
+            font-family: var(--titulo);
+            color:var(--branco);
+            font-size: 36px;
+            font-weight: 700;
+        }
+        & p{font-size: 18px; color: var(--preto); font-family: var(--texto);}
+
+        & .imagem{
+            width: 150px;
+            border:3px solid;
+            border-radius: 50%;
+            border:2px solid #ffffff31; 
+            border-left: none;        
+            margin-bottom: 10px;
+            & img{
+                width:100%; object-fit: cover;
+                transition: .2s ease-in;
+                &:hover{transform: scale(1.1); transition: .2s ease-in;}
+            }
+        }
+    }
+
+}
+/*personalizacao do popover*/
+.custom-popover {
+  --bs-popover-body-padding-x: .5rem;
+  --bs-popover-body-padding-y: .5rem;
+  --bs-popover-font-size : .8rem;
+  --bs-popover-body-color: var(--azul-escuro);
+}
+
+
+.cards{
+    margin-top: 20px;
+
+    & .card{
+        background: rgba(0, 0, 0, 0.4);
+        font-family: var(--texto);
+        border: 1px solid rgb(48, 48, 48);
+        & .card-body{
+            & .card-icon{color:var(--amarelo);}
+            & .card-title{
+            color:var(--amarelo);
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        } 
+        & .card-text{
+            font-size: .8rem;
+            color:var(--branco);
+        }
+    }
+}
+
+.btn-recursos-pro{
+    margin-top: 30px;
+    & div{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:9px;
+        padding: 8px 20px;
+        border-radius:11px;
+        border:2px solid #00214d;
+        background-color: var(--amarelo);
+        animation: fadeIn 2s ease infinite;
+        transition:.5s ease;
+        &:hover{background: #d3bd42; transition:background .5s ease;}
+    & a{
+        text-decoration: none;
+        font-size: .9rem;
+        color: var(--botao);
+        font-weight: 700;
+    }
+    }
+}
+
+article{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width: 80%;
+    max-width: 1100px;
+    height:auto;
+    margin: 60px auto;
+    padding: 40px 30px;
+    border-radius:13px;
+    background: rgba(0, 0, 0, 0.4);
+
+    & .titulo .como-funciona{
+        font-size:1.7rem;
+        color:var(--amarelo);
+    }
+    & .titulo .texto{
+        font-size:.9rem;
+        color:var(--branco);
+    }
+    
+
+}
+
+.passos{
+    margin-top:20px;
+    display:flex;
+    justify-content:space-between;
+}
+.accordion-flush{
+    width:360px;
+    font-size: .8rem;
+    
+    --bs-accordion-color: #ffffff;
+    --bs-accordion-bg: transparent;
+    --bs-accordion-btn-color: #ffffff;
+    --bs-accordion-btn-bg: transparent;
+    --bs-accordion-active-color:var(--amarelo);
+    --bs-accordion-active-bg:transparent;
+    --bs-accordion-border-color:var(--amarelo);
+    --bs-accordion-border-width::8px;
+}
+
+.imagem-do-app{
+    width:300px;
+    padding:10px;
+    border:2px solid #fff;
+    border-radius:11px;
+    background: rgba(0, 0, 0, 0.6);
+
+    & img{width:100%; object-fit: cover;}
+}
+
+.section3{
+    width: 90%;
+    max-width: 1200px;
+    height:auto;
+    margin: 0px auto;
+    padding: 40px 30px;
+    border-radius:0px 0px 3px 3px;
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 23px );
+    -webkit-backdrop-filter: blur( 23px );
+
+    & .versao{
+        border:1px solid #d3bd42 ;
+        border-radius:12px;
+        display: flex;
+        justify-content:center;
+        gap:20px;
+        & .titulo{
+            text-align: center;
+            font-family: var(--texto);
+            & h1{font-size:30px; color:var(--amarelo); font-weight: 700;}
+            & p{font-size:18px; color: var(--branco);}
+        }
+
+        & .versao-normal, .versao-pro{
+            font-family: var(--texto);
+            background: rgba(0, 0, 0, 0.7);
+            border:2px solid var(--branco);
+            border-radius:13px;
+            padding:10px;
+            height:auto;
+            width:270px;
+            
+
+            & .header{
+                & h1{font-family: var(--titulo); font-size: 1rem; font-weight: 700; color: var(--branco); & span{color:var(--amarelo);}}
+                & p{font-size: .7rem; color:#ffffff98;}
+            }
+            & .preco{
+                & h1{font-family: var(--titulo); font-size: 1.3rem; font-weight: 700; color: var(--branco); & span{font-size: .6rem; color:#ffffff98;}}
+                & p{font-size: .7rem; font-weight: normal; color:#ffffff98;}
+            }
+            & .body{
+                & ul{list-style: none; & li{font-size:.8rem; color:var(--branco); letter-spacing: .5px; margin-bottom: 6px; & .fa-check{color:var(--amarelo);} }}
+            }
+            & .footer{
+                border:1px solid white;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                font-family: var(--titulo);
+                height:40px;
+                border-radius:10px;
+
+                & button{font-size:.9rem; border:none; padding:3px 8px; border-radius:11px; 
+                
+                & .versao-seta{transform: translateX(-8px); display:none; }
+            }
+        }
+        
+    }
+}
+
+.perguntas-frequente{
+    margin-top:40px;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    & .titulo{
+        text-align: center;
+        & h1{color:var(--amarelo);}
+    }
+    & .perguntas{
+        margin-top:20px;
+        & .accordion{
+            border-left:1px solid #ffffff;
+            padding: 7px;
+            width:400px;
+            font-size:13px;
+            --bs-accordion-color: #ffffff;
+            --bs-accordion-bg: transparent;
+            --bs-accordion-btn-color:#d3bd42 ;
+            --bs-accordion-btn-bg: transparent;
+            --bs-accordion-active-color:var(--amarelo);
+            --bs-accordion-active-bg:transparent;
+            --bs-accordion-border-color:var(--amarelo);
+            --bs-accordion-border-width::8px;
+        }
+        & .imagem{
+            width: 200px;
+            margin: 0 auto;
+            & img{width:100%; object-fit: cover;}
+        }
+    }
+}
+.baixar-aplicativo{
+    & .boxs{
+        & .imagem{
+            width:200px;
+            & img{width: 100%; object-fit: cover;}
+        }
+        & .texto{
+            font-family: var(--titulo);
+            & h1 ,h2{font-size: 35px; font-weight: 700; color:var(--branco);}
+            & span{color:var(--amarelo);}
+
+            & button{padding:7px 12px; margin-top:30px; border:none; border-radius:12px; background-color: var(--amarelo); color:var(--branco); font-weight:700; transition:.5s ease;
+            &:hover{background: #c7b23c; transition:.5s ease;}}
+        }
+    }
+}
+
+.apoie{
+    margin-top: 30px;
+    padding:15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    & .texto{
+        text-align: center;
+        & h1{font-size: 1.2rem; color:var(--branco); font-family: var(--titulo); font-weight: 700;}
+        & p{font-size:.9rem; color:var(--branco); font-family: var(--texto);}
+    }
+    & .btn{
+        & button{padding:7px 10px; width:150px; font-size: .8rem; border-radius: 10px; background: var(--botao); color:var(--branco); border:none; font-family: var(--titulo); margin:5px 10px;
+        &:hover{background: #011633; transition:.5s ease;}}
+    }
+}
+
+}
+
+.rodape{
+    margin-top:50px;
+    height:auto;
+    background: var(--botao);
+    border-radius: 10px;
+    padding: 30px 20px;
+    & .linha{
+        width:100%;
+
+        & .lista{
+            width: 100%;
+            & div{
+                display: flex;
+                flex-direction: column;
+                width:250px;
+                margin-bottom: 10px;
+                margin-right: 10px;
+                color: var(--branco);
+                font-family: var(--texto);
+                & h5{font-size: 1rem; font-family: var(--titulo); font-weight: 700; }
+                & a{font-size: .8rem; text-decoration: none;color: var(--branco); margin-top: 5px;
+                &:hover{background: #011633; transition:.3s ease;} }
+            }
+        }
+
+        & .logo{
+            width:300px;
+            display:flex;
+            align-items:end;
+            & .logotipo{
+                margin-top: 30px;
+                margin-left:10px;
+                width:35px;
+                height:35px;
+                border-radius:50%;
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                color:#fff;
+                & img{width:100%; object-fit:cover; border-radius:50%;}
+                & h5{font-size:.8rem; font-weight:700; & span{font-weight:200;}}
+            }
+
+            & .midia {
+                & a{
+                margin-right: 10px;
+                color:var(--branco);
+                &:hover{color:var(--azul); transition: .1s ease;}
+            }
+            }
+            
+        }
+        & .versao{
+                margin-top:40px;
+                font-size: .8rem;
+                color:var(--branco);
+                font-family: var(--texto);
+            }
+    }
+}
+.alert{
+    animation:alert-animate .4 ease;
+    font-family: var(--texto);
+    font-weight: 600;
+    --bs-alert-bg: var(--fundo-claro);
+    --bs-alert-color: var(--botao);
+    --bs-alert-border-color: var(--botao);
+}
+@keyframes alert-animate {
+    from{
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0px);
+        opacity:1;
+    }
+}
+
+
+/*animacao btn recursos PRO*/
+ @keyframes fadeIn {
+    0%,100%{background-color: #fde24f;}
+    50%{background-color: #c7b23c;}
+ }
+
+</style>
+
+<body>
+    
+    <main >
+
+        <section class="section1" >
+            <nav  >
+                <div class="logo">
+                    <a href="index.html"><img src="frontend/assets/logo-sms.jpg" alt=""></a>
+                    <h5>SMS<span>GESTOR</span></h5>
+                </div>
+                <div class="links">
+                    <ul>
+                        <li><a href="#caracteristicas">Características</a></li>
+                        <li><a href="#como-funciona">Como funciona</a></li>
+                        <li><a href="">Guia rádipo de uso</a></li>
+                        <li class="blog"><a href="">Blog </a></li>
+                        <li><a href="">Doações <i class="fa-solid fa-hand-holding-heart"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="btn-login">
+                    <a href="frontend/painel_user.php"><span id="painel"> Ir para o painel <i class="fa-solid fa-user-large"></i></span></a>
+                    <a href="frontend/sessao.html"><span id="entrar">Entrar <i class="fa-solid fa-door-open"></i></span></a>
+                </div>
+            </nav>
+            <div class="alert alert-warning alert-dismissible fade show  start-50 translate-middle-x mt-3 shadow " role="alert" style="display: none; font-size:.8rem; z-index: 1055;">
+            <i class="fa-solid fa-hand-holding-heart"></i> Desbloqueie funções avançadas com uma doação e ajude a manter o projeto vivo!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
+
+            <div class="hero-section">
+                <div class="hero-conteudo">
+                    <h1>Gerencie e envie <img src="frontend/assets/sms-azul.png" alt=""><br>
+                        <span>mensagens com facilidade!</span></h1>
+                    <h5>Cadastre seus contatos, envie SMS <br>
+                        e organize tudo em um só lugar, direto do seu painel. <br>
+                        Mensagens automáticas sem complicações.
+                        </h5>
+                </div>
+
+                <button class="btn-comecar"><a href="">Começar</a> <i class="fa-solid fa-arrow-right"></i></button>
+
+                <div class="container box-porcento" >
+                    <div class="row ">
+                        <div class="box1 col col-10 col-sm-6 col-md-4 mb-1">
+                            <h2>Envie mensagens gastando até <span>98%</span> menos do que métodos tradicionais.</h2>
+                        </div>
+                        <div class="box2 col col-10 col-sm-6 col-md-4 mb-1">
+                            <h2>Configure tudo em menos de <span>3 minutos</span> – simples e rápido.</h2>
+                        </div>
+                        <div class="box3 col col-10 col-sm-6 col-md-4 mb-1">
+                            <h2>Mais de <span>400</span> mensagens disparadas mensalmente, e crescendo!</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="beneficio">
+                <div class="imagem">
+                    <img src="frontend/assets/undraw_designer_efwz.svg" alt="">
+                </div>
+                <div class="textos">
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i>
+                            Recursos de SMS do seu Android existente.
+                        </li>
+                        <li><i class="fa-solid fa-check"></i>
+                            Use seu próprio número.
+                        </li>
+                        <li><i class="fa-solid fa-check"></i>
+                            Painel 100% online.
+                        </li>
+                        <li><i class="fa-solid fa-check"></i>
+                            Armazene contatos com segurança.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="usuarios-felizes">
+                <h1><span>999+</span> usuários felizes em toda Angola</h1>
+            </div>
+        </section>
+
+        <section class="section2 container-fluid" id="caracteristicas">
+            <div class="titulo container text-center">
+                <div class="imagem img-vetor" 
+                data-bs-toggle="popover" 
+                data-bs-trigger="hover" 
+                data-bs-placement="right"
+                data-bs-custom-class="custom-popover"
+                data-bs-content="Olá. Seja membro da família!">
+                    <img src="frontend/assets/vetor.png" alt="vetor">
+                </div>
+                <h1 >
+                    Sua central completa para envio de mensagens inteligentes
+                </h1>
+                <p>Transforme seu Android em um gateway SMS profissional com recursos de alto desempenho.
+                </p>
+                
+            </div>
+
+            <div class="row cards" >
+                
+                <div class="col-sm-12  col-md-6 col-lg-3 mb-3 mb-md-3" >
+                  <div class="card">
+                    <div class="card-body">
+                        <i class="fa-solid fa-database card-icon"></i>
+                      <h5 class="card-title">SMS API</h5>
+                      <p class="card-text">Este serviço utiliza a API pública do TextBee como base para o envio de mensagens.
+                        <br>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12  col-md-6 col-lg-3 mb-3    mb-md-3">
+                  <div class="card">
+                    <div class="card-body">
+                        <i class="fa-solid fa-users card-icon"></i>
+                      <h5 class="card-title">Disparo em Massa</h5>
+                      <p class="card-text">Envie uma única mensagem para centenas de contatos com apenas uma chamada de API. Rápido, simples e eficiente.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12  col-md-6 col-lg-3 mb-3    mb-md-3">
+                  <div class="card">
+                    <div class="card-body">
+                        <i class="fa-solid fa-square-envelope card-icon"></i>
+                      <h5 class="card-title">Modelos Inteligentes de SMS </h5>
+                      <p class="card-text">Salve mensagens personalizáveis com variáveis. Envie com rapidez sem digitar tudo novamente.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12  col-md-6 col-lg-3 mb-3    mb-md-3">
+                  <div class="card">
+                    <div class="card-body">
+                        <i class="fa-solid fa-user-secret card-icon"></i>
+                      <h5 class="card-title">Segurança Total, Seus Dados com Você</h5>
+                      <p class="card-text">As mensagens ficam no seu dispositivo. Nenhum servidor externo acessa suas informações.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12  col-md-6 col-lg-3 mb-3    mb-md-3">
+                  <div class="card">
+                    <div class="card-body">
+                        <i class="fa-solid fa-chart-line card-icon"></i>
+                      <h5 class="card-title">Estatísticas em Tempo Real</h5>
+                      <p class="card-text">Veja relatórios completos de envio, entregas e falhas. Monitore e otimize cada campanha.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12  col-md-6 col-lg-3 mb-3    mb-md-3">
+                  <div class="card">
+                    <div class="card-body">
+                        <i class="fa-solid fa-mobile card-icon"></i>
+                      <h5 class="card-title">Conecte Vários Dispositivos</h5>
+                      <p class="card-text">Use até 5 telefones Android ao mesmo tempo para mais agilidade e maior capacidade de envio.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12  col-md-6 col-lg-3 mb-3    mb-md-3">
+                  <div class="card">
+                    <div class="card-body">
+                        <i class="fa-solid fa-sd-card card-icon"></i>
+                      <h5 class="card-title"> Envios Programados</h5>
+                      <p class="card-text">Agende suas mensagens para o melhor momento. Uma vez configurado, ele cuida do resto.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-12  col-md-6 col-lg-3 mb-3    mb-md-3">
+                  <div class="card">
+                    <div class="card-body">
+                        <i class="fa-solid fa-code-branch card-icon"></i>
+                      <h5 class="card-title">Código 100% Aberto</h5>
+                      <p class="card-text">Transparência garantida. Nosso projeto está no GitHub e pode ser auditado por qualquer pessoa.</p>
+                    </div>
+                  </div>
+                </div>
+                
+            </div>
+        <div class="btn-recursos-pro">
+            <div><a href="">Atualiza para recursos PRO <i class="fa-solid fa-arrow-right"></i></a></div>
+        </div>
+
+            <article class=" container-fluid" id="como-funciona" >
+                <div class="titulo">
+                    <h1 class="como-funciona">Como funciona</h1>
+                    <p class="texto">Como funciona é Simples e Poderoso. Você instala o <a href="https://dl.textbee.dev" target="_blank">aplicativo</a> em seu dispositivo Android e ele transformará seu dispositivo em um gateway de SMS. Em seguida, acessa o site <a href="https://textbee.dev/" target="_blank">textbee.dev</a>
+                    para gerar a sua 'chave de API' compatível ao seu numero de telefone e por fim você irá inserir a sua 'chave de API' no nosso site para enviar mensagens SMS de forma profissional.</p>
+                    
+                </div>
+
+                <div class="passos">
+
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                Passo 1: Baixe o aplicativo Android
+                            </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">Baixe o aplicativo Android em <a href="https://dl.textbee.dev" target="_blank">https://dl.textbee.dev</a></div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                Passo 2: Gerar uma chave de API
+                            </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">Gerar uma chave de API a partir do painel do site textbee.dev</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                Passo 3: Digitalize o código QR
+                            </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">Abra o aplicativo móvel textbee e escaneie o código QR ou insira sua chave de API manualmente e ative o aplicativo gateway</div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                Passo 4: Comece a enviar
+                            </button>
+                            </h2>
+                            <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">Volte ao nosso site logo no seu painel poderás inserir a sua chave API e pronto, ja está!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="imagem-do-app">
+                        <img src="frontend/assets/app-screenshot.png" alt="app-screenshot">
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <section class="section3 container-fluid">
+            <div class="versao row" id="precificacao">
+                <div class="titulo">
+                    <h1>Veja o que está disponível em cada versão</h1>
+                    <p>Sua doação ajuda a manter o projeto vivo — e ainda libera recursos incríveis!</p>
+                </div>
+                <div class="versao-normal col-sm-12 col-md-6 mb-3">
+                    <div class="header">
+                        <h1>Normal - <span>GRATUITA</span></h1>
+                        <p>Comece agora a usar o versão básica do SMS Gestor</p>
+                    </div>
+                    <div class="preco">
+                        <h1>$Kz 0<span>/por mês</span></h1>
+                        <p>Não é necessário cartão de crédito</p>
+                    </div>
+                    <div class="body">
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Enviar e receber mensagens SMS</li>
+                            <li><i class="fa-solid fa-check"></i> Máximo 25 mensagens por dia</li>
+                            <li><i class="fa-solid fa-check"></i> Até 300 mensagens por mês</li>
+                            <li><i class="fa-solid fa-check"></i> Até 25 destinatários em massa</li>
+                            <li><i class="fa-solid fa-check"></i> Notificações de webhook</li>
+                            <li><i class="fa-solid fa-check"></i> Histórico de mensagens (limitado)</li>
+                            <li><i class="fa-solid fa-check"></i> Acesso básico ao envio de mensagens</li>
+                            <li><i class="fa-solid fa-check"></i> Sem estatísticas detalhadas</li>
+                            <li><i class="fa-solid fa-check"></i> Publicidade ativa</li>
+                            <li><i class="fa-solid fa-check"></i> Suporte básico</li>
+                        </ul>
+                        <div class="footer">
+                            <a href=""><button onmouseenter="btnVersao1()" >Comece Gratuitamente <i class="fa-solid fa-arrow-right versao-seta versao-seta1"></i></button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="versao-pro col-sm-12 col-md-6 mb-3">
+                    <div class="header">
+                        <h1>PRO <i class="fa-solid fa-award"></i> - <span>Após doação <i class="fa-solid fa-hand-holding-heart"></i></span></h1>
+                        <p>Qualquer valor é significativo para nós, assim conseguimos atualizar novos recursos para a aplicação.</p>
+                        <p>Perfeito para empresas e usuários sérios</p>
+                    </div>
+                    <div class="preco">
+                        <h1>$Kz Da sua autoria<span>/apenas uma vez</span></h1>
+                        <p>Doação via paypal</p>
+                    </div>
+                    <div class="body">
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Enviar e receber mensagens SMS</li>
+                            <li><i class="fa-solid fa-check"></i> Máximo 50 mensagens por dia</li>
+                            <li><i class="fa-solid fa-check"></i> Até 500 mensagens por mês</li>
+                            <li><i class="fa-solid fa-check"></i> Até 50 destinatários em massa</li>
+                            <li><i class="fa-solid fa-check"></i> Notificações de webhook</li>
+                            <li><i class="fa-solid fa-check"></i> Histórico completo de mensagens</li>
+                            <li><i class="fa-solid fa-check"></i> Acesso a funcionalidades avançadas</li>
+                            <li><i class="fa-solid fa-check"></i> Com estatísticas + relatórios</li>
+                            <li><i class="fa-solid fa-check"></i> Sem anúncios (experiência limpa)</li>
+                            <li><i class="fa-solid fa-check"></i> Suporte Prioritário</li>
+                        </ul>
+                    </div>
+                    <div class="footer">
+                        <a href=""><button style="background:#fde24f;" onmouseenter="btnVersao2()">Atualize para PRO <i class="fa-solid fa-arrow-right versao-seta versao-seta2"></i></button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="perguntas-frequente" id="faq">
+                <div class="titulo">
+                    <h1>Perguntas Frequêntes</h1>
+                </div>
+
+                <div class="perguntas d-sm-block d-md-flex ">
+
+                    <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            1. Preciso instalar algum aplicativo no meu celular?
+                        </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Sim. Para que o envio de SMS funcione, você precisa instalar o aplicativo TextBee no seu dispositivo Android. É através dele que o sistema transforma seu telefone em um gateway de mensagens.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            2. O que é o TextBee e por que meu site depende dele?
+                        </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            O TextBee é uma solução de código aberto que transforma seu telefone Android em um gateway de SMS. Nosso site utiliza a API do TextBee para oferecer uma plataforma completa de envio de mensagens, mas com um painel personalizado e funcionalidades exclusivas para nossos usuários.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        3. O TextBee terá acesso às minhas mensagens ou contatos?
+                        </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Não. Toda a comunicação é feita diretamente do seu celular, e seus dados permanecem somente no seu dispositivo. A privacidade é uma das principais vantagens da plataforma.
+                        </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        4. Preciso pagar para usar a plataforma?
+                        </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Você pode usar a versão normal gratuitamente, com recursos essenciais. A versão Pro é liberada após uma doação e oferece funcionalidades extras, como agendamento de mensagens, múltiplos dispositivos e acesso prioritário ao suporte.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        5. Posso cadastrar meus próprios contatos?
+                        </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Sim. Cada usuário pode criar sua conta e gerenciar sua própria lista de contatos diretamente pelo painel.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        6. Preciso configurar alguma APIKey?
+                        </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Sim. Após instalar o TextBee no seu Android, você irá gerar uma APIKey única, que deve ser inserida no painel do seu usuário para conectar o celular ao sistema.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                        7. O meu número precisa ter plano de mensagens SMS?
+                        </button>
+                        </h2>
+                        <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Sim. As mensagens enviadas de forma automatizada via API são descontados no teu plano de mensagem normal.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                        8. Como funciona o envio de mensagens em massa?
+                        </button>
+                        </h2>
+                        <div id="collapseEight" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Basta importar ou adicionar os contatos à sua lista e usar a função de mensagem em massa para enviar para todos com um único clique ou chamada de API.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                        9. O site é seguro?
+                        </button>
+                        </h2>
+                        <div id="collapseNine" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Sim. Nenhum dado sensível é compartilhado com terceiros. Todas as informações ficam armazenadas com segurança e criptografia adequada, e o envio de SMS é feito diretamente pelo seu próprio celular.
+                        </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                        10. O que ganho na versão Pro?
+                        </button>
+                        </h2>
+                        <div id="collapseTen" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            Além de ajudar no desenvolvimento do projeto, você desbloqueia recursos exclusivos como: (Agendamento de mensagens, Modelos de mensagens, Múltiplos dispositivos, Estatísticas avançadas).
+
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="imagem ">
+                        <img src="frontend/assets/vetor3.png" alt="vetor" class="img-vetor"
+                        data-bs-toggle="popover" 
+                        data-bs-trigger="hover" 
+                        data-bs-placement="right"
+                        data-bs-custom-class="custom-popover"
+                        data-bs-content="Alôôô! que tal tirares suas dúvidas!">
+                    </div>
+
+                </div>
+
+                
+
+            </div>
+
+            <div class="baixar-aplicativo">
+                <div class="boxs d-md-flex align-items-center ">
+
+                    <div class="imagem">
+                        <img src="frontend/assets/afro-homem.png" alt="afro homem" class="img-vetor"
+                        data-bs-toggle="popover" 
+                        data-bs-trigger="hover" 
+                        data-bs-placement="top"
+                        data-bs-custom-class="custom-popover"
+                        data-bs-content="Ancioso para começar?">
+                    </div>
+                    <div class="texto">
+                        <h1>Baixe o Aplicativo e gera a sua API no textbee.dev</h1>
+                        <h2>Esperamos por <span>você.</span></h2>
+                        <a href=""><button>Baixar Aplicativo <i class="fa-solid fa-download"></i></button></a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="apoie">
+                <div class="texto">
+                    <h1><i class="fa-solid fa-heart"></i> Contribua com o projeto</h1>
+                    <p>Desenvolver e manter esta plataforma exige tempo, energia e compromisso. Sua doação nos ajuda a evoluir o sistema, criar novas funcionalidades, melhorar a performance e manter a segurança em alto nível — tudo isso para oferecer a melhor experiência a você.</p>
+                </div>
+                <div class="btn">
+                    <a href=""><button><i class="fa-regular fa-star"></i> Estrela no GitHub</button></a>
+                    <a href=""><button><i class="fa-solid fa-money-check-dollar"></i>  Doação</button></a>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="rodape container-fluid" >
+            <div class="linha d-md-flex">
+                <div class="lista d-md-flex">
+                    <div>
+                        <h5>Produto</h5>
+                        <a href="#caracteristicas">Características</a>
+                        <a href="#precificacao">Precificação</a>
+                        <a href="#como-funciona">Como funciona</a>
+                        <a href="">Documentação</a>
+                    </div>
+                    <div>
+                        <h5>Suporte</h5>
+                        <a href="#faq">Perguntas frequêntes</a>
+                        <a href="">Contacte-nos</a>
+                        <a href="">Status do sistema</a>
+                    </div>
+                    <div>
+                        <h5>Legal</h5>
+                        <a href="">Política de privacidade</a>
+                        <a href="">Termos de serviço</a>
+                    </div>
+                </div>
+                    <div class="logo">
+                        
+                        <div class="midia">
+                            <a href=""><i class="fa-brands fa-github"></i></a>
+                            <a href=""><i class="fa-brands fa-linkedin"></i></a>
+                        </div>
+                        <div class="logotipo">
+                            <a href=""><img src="frontend/assets/logo-sms.jpg" alt=""></a>
+                            <h5>SMS<span>GESTOR</span></h5>
+                        </div>
+                        
+                    </div>
+                    <div class="versao">
+                            <p>Versão: 1.0.0</p>
+                            <p>© <span class="ano"></span> Todos os direitos reservados.</p>
+                        </div>
+            </div>
+        </div>
+        
+        
+
+
+    </main>
+
+
+
+
+        
+    <script>
+
+        function btnVersao1(){
+            let setaVersao= document.querySelector('.versao-seta1')
+            setaVersao.style.transform='translateX(0px)'
+            setaVersao.style.display='inline-block'
+        }
+        function btnVersao2(){
+            let setaVersao= document.querySelector('.versao-seta2')
+            setaVersao.style.transform='translateX(0px)'
+            setaVersao.style.display='inline-block'
+        }
+
+        let ano = new Date().getFullYear()
+        document.querySelector('.ano').innerHTML = `${ano}`
+        
+        //mensagem de alerta para doação
+        document.addEventListener('DOMContentLoaded',()=>{
+            let alert = document.querySelector('.alert')
+            alert.style.display='block'
+            // alert.style.transform='translate(0px)'
+            // alert.style.opacity='1'
+            // alert.style.transition='.4s ease'
+        })
+
+        /* script dropdown do navbar */
+        // let dropdown_Items = document.querySelector('.dropdown-item-none')
+        // document.querySelector('.dropdown').addEventListener('mouseenter', ()=>{
+        //     dropdown_Items.classList.add('dropdown-item')
+        // })
+        // document.querySelector('.dropdown').addEventListener('mouseleave', ()=>{
+        //     dropdown_Items.classList.remove('dropdown-item')
+        // })
+        
+        /* fazer a caixa do login aumentar zoom quando a pagina carrega [para dispertar atenção]*/
+        document.addEventListener('DOMContentLoaded', ()=>{
+            document.querySelector('.btn-danger').style.animation='move 1s ease-in'
+        })
+
+        /*Ativar popover do bootstrap para img-vetor*/
+        const popovers = document.querySelectorAll('.img-vetor');
+        popovers.forEach(pop => {
+            new bootstrap.Popover(pop);
+        });
+    
+    </script>
+
+     <!--Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+
+    <!-- Icon FontAwesome -->
+    <script src="https://kit.fontawesome.com/3f04aa5ab1.js" crossorigin="anonymous"></script>
+    
+    
+</body>
+</html>

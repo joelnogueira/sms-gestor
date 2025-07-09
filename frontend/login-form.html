@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+<link rel="stylesheet" href="https://loading.io/css/">
+
+</head>
+<body>
+    
+    <section>
+        <div class="imagem-vetor">
+            <img src="assets/vetor2.png" alt="vetor">
+            <a id="btn-hidden" class="btn-hidden"> Posso sumir?</a>
+        </div>
+        <div class="form-Box">
+            <h1>Iniciar sessão</h1>
+            <form action="../backend/validar_login.php" method="post" id="form">
+                    
+    
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Insira o seu email" required aria-autocomplete="on">
+    
+                    <label for="senha">Senha</label>
+                    <input type="password" name="senha" id="senha" placeholder="Insira a sua senha" aria-autocomplete="none" required>
+                    <span id="alert" class="erro"></span>
+                    
+                    <div id="progress-container" style="display:none;">
+                        <div id="progress-bar"></div>
+                    </div>
+                    
+                    <button name="submit" class="btn-submit">Iniciar</button>
+                    
+            </form>
+                <p class="entrar"><a href="">Esqueci a minha senha 😔</a></p>
+                <p class="entrar">Ainda não tem uma conta? <a onclick="criar_conta_form()">Registar-se</a></p>
+        </div>
+    </section>
+
+</body>
+</html>

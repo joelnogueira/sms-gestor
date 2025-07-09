@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessão</title>
+
+    <!--Biblioteca Animate css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+
+</head>
+    
+<style>
+
+
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    /*Fonte Dancing Script*/
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+
+    :root{
+        --titulo:"Poppins", sans serif;
+        --texto:"Inter", sans serif;
+        --azul:#1E88E5;
+        --fundo-claro:#F5F5F5;
+        --branco:#FFFFFe;
+        --preto:#1A1A1A;
+        --botao:#00214d;
+        --azul-escuro:#1b2d45;
+        --amarelo:#fde24f;
+        --verde-sucesso:#43A047;
+        
+    }
+
+
+    *{margin:0; padding:0; box-sizing:border-box;}
+    body{
+        background-image: url(assets/circle-scatter-haikei-sessao.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height:100vh;
+        
+
+    }
+
+    nav{
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-family: var(--texto);
+
+
+    & .logo{
+        width:40px;
+        height:40px;
+        border-radius:50%;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        margin-right:20px;
+        color:#fff;
+        & img{width:100%; object-fit:cover; border-radius:50%;}
+        & h5{font-size:.8rem; font-weight:700; & span{font-weight:200;}}
+    }
+}
+
+.btnBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--titulo);
+    font-size: 13px;
+    & #iniciar-sessao{
+        padding: 3px 10px;
+        border-radius: 5px;
+        background-color: var(--azul);
+        color: var(--branco);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        &:hover{
+            background-color: var(--azul-escuro);
+        }
+    }
+    & #criar-conta{
+        padding: 3px 10px;
+        border-radius: 5px;
+        background-color: var(--azul-escuro);
+        color: var(--branco);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        &:hover{
+            background-color: var(--azul);
+        }
+    }
+    
+}
+
+    main{
+        padding:30px 10px;
+        display:flex;
+        justify-content: center;
+        align-items:center;
+        width: 100%;
+        height:100vh;
+        
+    }
+
+
+
+    section{
+        display: flex;
+        justify-content:center;
+        width:100%;
+        max-width:800px;
+        height: auto;
+        animation: fadeIn 0.5s ease-in-out ;
+        transition: all 0.5s ease;
+    }
+    .imagem-vetor{
+        position:relative;  
+        width:50%;
+        z-index: 9999;
+        transition: width 0.5s ease opacity 0.5s ease;
+        display: flex ;
+        justify-content: end;
+        & img{
+            width:80%; object-fit: cover; transform:translateX(45.2px); 
+        }
+    }
+    .imagem-vetor.oculto {
+        width: 0;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .btn-hidden{
+        position: absolute;
+        display:none;
+        top: 10%;
+        left: 40%;
+        padding: 5px 10px;
+        color: var(--branco);
+        background-color: var(--azul-escuro);
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: var(--texto);
+        font-size: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        animation: hidden-anime 1s infinite alternate;
+        &:hover{
+            background-color: var(--azul);
+        }
+    }
+    @keyframes hidden-anime {
+        from{ transform:scale(0.8);}
+        to{transform:scale(0.9);}
+    }
+
+    .centralizar-form {
+        width: 400px!important;
+    }
+
+    .form-Box{
+        width:50%;
+        background-color: var(--fundo-claro);
+        padding:20px 50px 20px 50px;
+        border-radius:10px;
+        background: rgba( 255, 255, 255, 0.1 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 23px );
+        -webkit-backdrop-filter: blur( 23px );
+        transition: width 0.5s ease;
+    }
+    
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    h1{
+        text-align:center;
+        font-family: var(--titulo);
+        font-size:1.5rem;
+        margin-bottom:5px;
+        color:var(--botao);
+    }
+    form{
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+        font-family: var(--texto);
+        color: var(--preto);
+
+    }
+    input{
+        padding:7px;
+        border-radius:11px;
+        border:1px solid var(--azul);
+        font-family: var(--texto);
+        font-size:12px;
+        font-weight: 600;
+        color: var(--preto);
+        background-color: var(--branco);
+        transition: border-color 0.3s ease;
+        &:focus{outline:none;}
+        &:focus-visible{
+            border-color: var(--azul-escuro);
+        }
+    }        
+    label{
+        font-family: var(--texto);
+        font-size: 13px;
+        color: var(--preto);
+        font-weight: 600;
+    }  
+.btn-submit{
+    width:100%; padding:10px; border-radius:11px; background-color: var(--botao); color: var(--branco); font-family: var(--texto); font-weight: 600; font-size: 14px; border:none; cursor:pointer; margin-top:10px;
+    &:hover{
+        background-color:#01193a;
+    }
+}
+.entrar{
+    text-align:center; font-family: var(--texto); font-size: 12px; color: var(--preto); margin-top: 10px;
+    & a{
+        color: var(--botao); text-decoration:none;
+        &:hover{text-decoration:underline; cursor:pointer;}
+    }
+}
+.erro{
+    font-size: 11px;
+    color: rgba(255, 0, 0, 0.747);
+    display: block; /* Esconder por padrão */
+    font-family: var(--texto);
+    font-weight: 500;
+    text-align: center;
+    margin-top:5px;
+    transition:all .3s ease;
+}
+.sucesso{
+    font-size: 11px;
+    color: var(--botao);
+    display: block; /* Esconder por padrão */
+    font-family: var(--texto);
+    font-weight: 600;
+    text-align: center;
+    margin-top:5px;
+    transition:all .3s ease;
+
+}
+
+.spinner-sessao {
+  margin: 0 auto;
+  width: 80px;
+  text-align: center;
+  display: none;
+  transition: all .3s ease;
+}
+
+.spinner > div {
+  width: 10px;
+  height: 10px;
+  background-color: var(--botao);
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% { -webkit-transform: scale(0) }
+    40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+} 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+}
+}
+
+#progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  border-radius: 10px 10px 0px 0px;
+  background-color: #f3f3f3;
+  z-index: 9999;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  border-radius: 10px 10px 0px 0px;
+  background-color: var(--botao);
+  transition: width 0.4s ease;
+}
+
+@media (max-width: 800px) {
+    .imagem-vetor{display:none;}
+}
+@media (max-width: 630px) {
+    .form-Box{padding:20px 20px; & h1{font-size:1.2rem;}}
+    
+    form{gap:10px; & label{font-size: 12px;} & input{font-size:11px;}}
+    nav{& .logo{width:30px; height:30px; & h5{font-size:.7rem;}} }
+    .btn-submit{padding: 8px;font-size: 13px;}
+    
+}
+
+
+
+
+</style>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="../index.html"><img src="assets/logo-sms.jpg" alt="sms-gestor"></a>
+            <h5 >SMS<span>GESTOR</span></h5>
+        </div>
+        <div class="btnBox">
+            <div id="iniciar-sessao" onclick="login_form()">
+                <p>Iniciar sessão</p>
+            </div>
+            <div id="criar-conta" onclick="criar_conta_form()">
+                <p>Criar conta</p>
+            </div>
+        </div>
+    </nav>
+    <main id="main">
+        
+    </main>
+    <script src="../js/formulario.js"></script>
+
+
+    <script src="https://kit.fontawesome.com/3f04aa5ab1.js" crossorigin="anonymous"></script>
+     
+</body>
+</html>
