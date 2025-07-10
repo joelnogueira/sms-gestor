@@ -529,156 +529,6 @@
             }
         }
 
-        .modal-sair {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(2px);
-        }
-
-        .modal-conteudo {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-            animation: aparecer 0.3s ease;
-
-            & h2 {
-                font-size: 18px;
-                margin-bottom: 15px;
-                font-family: var(--titulo);
-            }
-
-            & p {
-                font-size: 12px;
-                margin-bottom: 20px;
-                color: #ccc;
-            }
-        }
-
-        .modal-acao {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .modal-acao button {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-family: var(--texto);
-            font-size: 13px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        #cancelar {
-            background-color: #ddd;
-        }
-
-        #confirmar {
-            background-color: #e74c3c;
-            color: white;
-        }
-
-        #cancelar:hover {
-            background-color: #ccc;
-        }
-
-        #confirmar:hover {
-            background-color: #c0392b;
-        }
-
-        @keyframes aparecer {
-            from {
-                transform: scale(0.9);
-                opacity: 0;
-            }
-
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-
-        .aviso-paginaInicial{
-            display:none;
-            position:absolute;
-            top:40%;
-            left:50%;
-            transform:translate(-50%, -50%);
-            z-index:9999;
-            width:320px;
-            padding:20px;
-            background-color: var(--branco) ;
-            color:var(--azul-fusco);
-            border-radius:12px;
-            box-shadow: 0 7px 15px rgba(70, 70, 70, 0.459);
-            & .fecharBox{
-                display:flex;
-                justify-content: end;
-                & .fechar{
-                    color:#bbb;
-                    transition:.3s ease;
-                    cursor:pointer;
-                    &:hover{
-                        color:#838383;
-                    }
-                }
-            }
-            & a{
-                color:var(--branco);
-                padding:7px 15px;
-                border-radius:12px;
-                background-color: var(--azul-suave);
-                font-size: var(--small-font-size);
-                transition: background-color .3s ease;
-                &:hover{
-                    background-color:var(--azul);
-                }
-            }
-        }
-        
-
-        .modal-aviso-concluido{
-            display:none;
-            position:absolute;
-            top:40%;
-            left:50%;
-            transform:translate(-50%, -50%);
-            z-index:9999;
-            background: white;
-            width:320px;
-            padding:20px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-            & a{
-                color:var(--branco);
-                padding:4px 15px;
-                border-radius:12px;
-                background-color: var(--azul-suave);
-                font-size: var(--small-font-size);
-                transition: background-color .3s ease;
-                &:hover{
-                    cursor:pointer;
-                    background-color:var(--azul);
-                }
-            }
-        }
-
-
-
 
 
         .tela-principal {
@@ -760,6 +610,21 @@
                 }
 
             }
+            .mais-contato{
+                cursor: pointer;
+                transition: .3s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                    transition: .3s ease;
+                }
+
+                &:active {
+                    transform: scale(1);
+                    transition: .3s ease;
+
+                }
+            }
 
 
             .notificacao {
@@ -772,6 +637,22 @@
                 border: 1px solid var(--branco);
                 border-top: none;
                 border-bottom: none;
+
+                & .sms, .sino{
+                    cursor: pointer;
+                    transition: .3s ease;
+
+                    &:hover {
+                        transform: scale(1.1);
+                        transition: .3s ease;
+                    }
+    
+                    &:active {
+                        transform: scale(1);
+                        transition: .3s ease;
+    
+                    }
+                }
 
             }
 
@@ -1109,3 +990,156 @@
     0%, 100%{opacity:1;}
     50%{opacity:0;}
 }
+
+
+/* ESTILOS DOS MODALS    */
+
+.aviso-paginaInicial{
+    display:none;
+    position:absolute;
+    top:40%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    z-index:9999;
+    width:320px;
+    padding:20px;
+    background-color: var(--branco) ;
+    color:var(--azul-fusco);
+    border-radius:12px;
+    box-shadow: 0 7px 15px rgba(70, 70, 70, 0.459);
+    & .fecharBox{
+        display:flex;
+        justify-content: end;
+        & .fechar{
+            color:#bbb;
+            transition:.3s ease;
+            cursor:pointer;
+            &:hover{
+                color:#838383;
+            }
+        }
+    }
+    & a{
+        color:var(--branco);
+        padding:7px 15px;
+        border-radius:12px;
+        background-color: var(--azul-suave);
+        font-size: var(--small-font-size);
+        transition: background-color .3s ease;
+        &:hover{
+            background-color:var(--azul);
+        }
+    }
+}
+
+
+.modal-aviso-concluido{
+    display:none;
+    position:absolute;
+    top:40%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    z-index:9999;
+    background: white;
+    width:320px;
+    padding:20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    & a{
+        color:var(--branco);
+        padding:4px 15px;
+        border-radius:12px;
+        background-color: var(--azul-suave);
+        font-size: var(--small-font-size);
+        transition: background-color .3s ease;
+        &:hover{
+            cursor:pointer;
+            background-color:var(--azul);
+        }
+    }
+}
+
+/*-----MODAL TERMINAR SESSÃO----*/
+
+.modal-sair {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(2px);
+}
+
+.modal-conteudo {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    animation: aparecer 0.3s ease;
+
+    & h2 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        font-family: var(--titulo);
+    }
+
+    & p {
+        font-size: 12px;
+        margin-bottom: 20px;
+        color: #ccc;
+    }
+}
+
+.modal-acao {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal-acao button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-family: var(--texto);
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#cancelar {
+    background-color: #ddd;
+}
+
+#confirmar {
+    background-color: #e74c3c;
+    color: white;
+}
+
+#cancelar:hover {
+    background-color: #ccc;
+}
+
+#confirmar:hover {
+    background-color: #c0392b;
+}
+
+@keyframes aparecer {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+

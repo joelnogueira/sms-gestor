@@ -32,10 +32,12 @@ $primeiroNome = ucfirst($nomeDivido);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- estilo do sidebar -->
-    <link rel="stylesheet" href="../css/painel_user.css">
     <!-- estilo do clima atual API -->
     <link rel="stylesheet" href="../css/clima_actual.css">
     <!-- estilo do painel-user -->
+    <link rel="stylesheet" href="../css/painel_user.css">
+    <!-- estilo do novo-contato -->
+    <link rel="stylesheet" href="../css/novo_contato.css">
 
 </head>
 </head>
@@ -47,6 +49,11 @@ $primeiroNome = ucfirst($nomeDivido);
         <div class="bounce2"></div>
         <div class="bounce3"></div>
     </div>
+
+    <!-- GRUPO DOS MODAIS  -->
+
+    <!-- MODAL PARA TERMINAR SESSÃO  -->
+
     <div id="modal-sair" class="modal-sair">
         <div class="modal-conteudo">
             <h2>Ooh! já vais?</h2>
@@ -58,6 +65,103 @@ $primeiroNome = ucfirst($nomeDivido);
             </div>
         </div>
     </div>
+    <!-- FIM  -->
+
+    <!-- MODAL PARA NOVO CONTATO  -->
+    <!-- Modal -->
+    <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Contato</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-box">
+                        <div class="nome">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Nome</span>
+                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                        </div>
+                        <div class="telefone">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Telefone</span>
+                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                        </div>
+                        <div class="email">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
+                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                        </div>
+                        <div class="morada">
+                            <div class="input-group input-group-sm mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Morada</span>
+                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                        </div>
+                        <div class="tag">
+                            <select class="form-select form-select-sm" aria-label="Small select example">
+                                <option selected>Escolha uma tag para seu contato</option>
+                                <option value="1">Amigo</option>
+                                <option value="2">Família</option>
+                                <option value="3">Trabalho</option>
+                                <option value="4">Cliente</option>
+                                <option value="5">Leads</option>
+                                <option value="6">Outro</option>
+                            </select>
+                        </div>
+                        <div class="file">
+                            <div class="mb-3">
+                                <label for="formFileSm" class="form-label">Adicionar Foto do Contato</label>
+                                <input class="form-control form-control-sm" id="formFileSm" type="file">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-ok">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIM -->
+
+    <!-- MODAL NOVA MENSAGEM -->
+    <div class="modal fade" id="exampleModalSMS" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nova Mensagem</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Destinatário:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Mensagem:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-ok">Enviar Mensagem</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIM -->
+
 
     <main class="loading">
 
@@ -101,7 +205,7 @@ $primeiroNome = ucfirst($nomeDivido);
                                 <ion-icon name="people-outline" class="nav__icon"></ion-icon>
                                 <span class="nav__name">Meus Contatos</span>
                             </a>
-                            <a href="#" class="nav__link">
+                            <a href="#" class="nav__link" data-bs-toggle="modal" data-bs-target="#exampleModalSMS">
                                 <ion-icon name="chatbubbles-outline" class="nav__icon"></ion-icon>
                                 <span class="nav__name">Nova Mensagem</span>
                             </a>
@@ -154,10 +258,10 @@ $primeiroNome = ucfirst($nomeDivido);
                         <i class="fa-solid fa-magnifying-glass icon"></i>
                         <input type="text" name="procurar" id="procurar" placeholder="Procurar contatos, mensagens">
                     </div>
-                    <div class="mais-sms">
+                    <div class="mais-sms" data-bs-toggle="modal" data-bs-target="#exampleModalSMS">
                         <i class="fa-solid fa-plus"></i>
                     </div>
-                    <div class="mais-contato">
+                    <div class="mais-contato" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i class="fa-solid fa-user-plus icon-grande "></i>
                     </div>
                     <div class="notificacao">

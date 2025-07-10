@@ -1,0 +1,59 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        /*Fonte Dancing Script*/
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+
+        :root {
+            /* fonte e tipografia */
+            --titulo: "Poppins", sans serif;
+            --texto: "Inter", sans serif;
+            --script:"Dancing Script",cursive;
+            --superGrande-font-size: 1.5rem;
+            --grande-font-size: 1.rem;
+            --normal-font-size: .875rem;
+            --small-font-size: .699rem;
+            --superSmall-font-size: 0.660rem;
+
+
+            --azul: #0C5DF4;
+            --azul-suave: #3498db;
+            --azul-escuro: #00214d;
+            --azul-fusco: #1b2d45;
+            --fundo-claro: #ccc;
+            --branco: #FFFFFF;
+            --amarelo: #fde24f;
+            --verde-escuro: #43A047;
+            --verde-claro: #2ecc71;
+            --vermelho: #e74c3c;
+            --cinza-escuro: #333;
+            --preto: #1A1A1A;
+
+
+        }
+
+
+
+.modal{
+    background-color: transparent;
+    backdrop-filter: blur(2px);
+    color:var( --azul-fusco);
+}
+.modal-header{
+    & h1{font-family: var(--titulo); color:var(--azul);}
+}
+.modal-body{
+    & span{ color:var(--azul);}
+    & .tag, .file{
+        margin-top:10px;
+    }
+    & label{ font-size:var(--normal-font-size); color:var(--azul); }
+}
+.modal-footer{
+    & .btn{
+        padding:6px;
+        color:var(--branco);
+        font-size:var(--normal-font-size);
+    }
+    & .btn-ok{ background-color:var(--azul); }
+}
