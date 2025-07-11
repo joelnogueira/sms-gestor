@@ -67,71 +67,6 @@ $primeiroNome = ucfirst($nomeDivido);
     </div>
     <!-- FIM  -->
 
-    <!-- MODAL PARA NOVO CONTATO  -->
-    <!-- Modal -->
-    <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Contato</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-box">
-                        <div class="nome">
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">Nome</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                            </div>
-                        </div>
-                        <div class="telefone">
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">Telefone</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                            </div>
-                        </div>
-                        <div class="email">
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                            </div>
-                        </div>
-                        <div class="morada">
-                            <div class="input-group input-group-sm mb-3">
-                                <span class="input-group-text" id="inputGroup-sizing-sm">Morada</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                            </div>
-                        </div>
-                        <div class="tag">
-                            <select class="form-select form-select-sm" aria-label="Small select example">
-                                <option selected>Escolha uma tag para seu contato</option>
-                                <option value="1">Amigo</option>
-                                <option value="2">Família</option>
-                                <option value="3">Trabalho</option>
-                                <option value="4">Cliente</option>
-                                <option value="5">Leads</option>
-                                <option value="6">Outro</option>
-                            </select>
-                        </div>
-                        <div class="file">
-                            <div class="mb-3">
-                                <label for="formFileSm" class="form-label">Adicionar Foto do Contato</label>
-                                <input class="form-control form-control-sm" id="formFileSm" type="file">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-ok">Adicionar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- FIM -->
-
     <!-- MODAL NOVA MENSAGEM -->
     <div class="modal fade" id="exampleModalSMS" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -161,6 +96,84 @@ $primeiroNome = ucfirst($nomeDivido);
     </div>
 
     <!-- FIM -->
+
+
+    <!-- MODAL PARA NOVO CONTATO  -->
+    <!-- Modal -->
+    <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="../backend/novo_contato.php" method="post" id="formNovoContato">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Contato</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-box">
+                            <div class="nome">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Nome</span>
+                                    <input type="text" name="nome" id="nome" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                            </div>
+                            <div class="telefone">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Telefone</span>
+                                    <input type="text" name="telefone" id="telefone" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                            </div>
+                            <div class="email">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Email</span>
+                                    <input type="text" name="email" id="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                            </div>
+                            <div class="morada">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Morada</span>
+                                    <input type="text" name="morada" id="morada" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                            </div>
+                            <div class="tag">
+                                <select name="tag" class="form-select form-select-sm" id="tag" aria-label="Small select example">
+                                    <option selected>Escolha uma tag para seu contato</option>
+                                    <option value="amigo">Amigo</option>
+                                    <option value="familia">Família</option>
+                                    <option value="trabalho">Trabalho</option>
+                                    <option value="cliente">Cliente</option>
+                                    <option value="lead">Lead</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                            </div>
+                            <div class="file">
+                                <div class="mb-3">
+                                    <label for="formFileSm" class="form-label">Adicionar Foto do Contato</label>
+                                    <input name="foto" id="foto" class="form-control form-control-sm" id="formFileSm" type="file" accept="image/*">
+                                </div>
+                            </div>
+
+                            <img id="preview" src="#" alt="Pré-visualização" style="display:none; width:180px; height:180px; border-radius:50%; object-fit:cover; border:2px solid var(--azul); margin:0 auto; ">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <p id="alertaNovoContato"> </p>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button name="submit" class="btn btn-ok">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- FIM -->
+
+
 
 
     <main class="loading">

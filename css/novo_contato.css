@@ -50,10 +50,24 @@
     & label{ font-size:var(--normal-font-size); color:var(--azul); }
 }
 .modal-footer{
+    display:flex;
+    justify-content:space-between;
+
+    & .alerta-sucesso{
+        font-size:var(--small-font-size);
+        color: var(--verde-escuro);
+        font-weight:600;
+    }
+    & .alerta-erro{
+        font-size:var(--small-font-size);
+        color: var(--vermelho);
+        font-weight:600;
+    }
     & .btn{
         padding:6px;
         color:var(--branco);
         font-size:var(--normal-font-size);
     }
     & .btn-ok{ background-color:var(--azul); }
+    
 }

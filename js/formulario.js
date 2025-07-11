@@ -2,7 +2,7 @@ function ativarValidarLogin() {
   // Validar o campo de email para aceitar apenas letras, números, pontos, sublinhados e o símbolo @
     document.getElementById("email").addEventListener("input", function (e) {
         const input = e.target;
-        input.value = input.value.replace(/[^a-zA-Z0-9._@]/g, ""); // Permitir apenas letras, números, pontos, sublinhados e o símbolo @
+        input.value = input.value.replace(/[^a-z-0-9._@]/g, ""); // Permitir apenas letras, números, pontos, sublinhados e o símbolo @
     });
 
     // Validar o campo de senha para aceitar apenas letras, números e caracteres especiais
@@ -91,13 +91,35 @@ function ativarValidarLogin() {
 function ativarValidarCriarConta() {
     //Validar o campo de nome para aceitar apenas letras, espaços e caracteres especiais
     document.getElementById("nome").addEventListener("input", function (e) {
-        const input = e.target;
-        input.value = input.value.replace(/[^a-zA-ZÀ-ÿ\s'-]/g, ""); // Permitir apenas letras, espaços, apóstrofos e hífens
+      const input = e.target;
+      input.value = formatarNome(input.value); // função  da validação
     });
+    function formatarNome(nome) {
+      // 1. Remover caracteres inválidos (aceita letras, espaços, hífens e apóstrofos)
+      nome = nome.replace(/[^a-zA-ZÀ-ÿ\s'-]/g, "");
+
+      // 2. Substituir múltiplos espaços por apenas um
+      // nome = nome.replace(/\s+/g, " ").trim();
+
+      // 3. Capitalizar cada palavra (com exceções)
+      const excecoes = ["da", "de", "do", "das", "dos", "e"];
+      return nome
+        .split(" ")
+        .map((palavra, index) => {
+          const palavraMin = palavra.toLowerCase();
+          if (excecoes.includes(palavraMin) && index !== 0) {
+            return palavraMin;
+          }
+          return palavraMin.charAt(0).toUpperCase() + palavraMin.slice(1);
+        })
+        .join(" ");
+    }
+
+
     // Validar o campo de email para aceitar apenas letras, números, pontos, sublinhados e o símbolo @
     document.getElementById("email").addEventListener("input", function (e) {
         const input = e.target;
-        input.value = input.value.replace(/[^a-zA-Z0-9._@]/g, ""); // Permitir apenas letras, números, pontos, sublinhados e o símbolo @
+        input.value = input.value.replace(/[^a-z-0-9._@]/g, ""); // Permitir apenas letras, números, pontos, sublinhados e o símbolo @
     });
     // Validar o campo de senha para aceitar apenas letras, números e caracteres especiais
     document.getElementById("senha").addEventListener("input", function (e) {

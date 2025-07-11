@@ -174,12 +174,6 @@ function ativarRelatorios() {
 }
 
 
-
-
-
-
-
-
 //-------------------------REQUISIÇÃO E ATIVAÇÃO DAS FUNCÕRS--------------------------------------
 
 function painel() {
@@ -218,7 +212,102 @@ function carregarPage(url){
     
 }
 
+//--------------------NOVO CONTATO------------------------------
+function novoContato(){
+  //Validar o campo de nome para aceitar apenas letras, espaços e caracteres especiais
+  document.getElementById("nome").addEventListener("input", function (e) {
+    const input = e.target;
+    input.value = formatarNome(input.value); // função  da validação
+  });
+  function formatarNome(nome) {
+    // 1. Remover caracteres inválidos (aceita letras, espaços, hífens e apóstrofos)
+    nome = nome.replace(/[^a-zA-ZÀ-ÿ\s'-]/g, "");
 
+    // 2. Substituir múltiplos espaços por apenas um
+    // nome = nome.replace(/\s+/g, " ").trim();
+
+    // 3. Capitalizar cada palavra (com exceções)
+    const excecoes = ["da", "de", "do", "das", "dos", "e"];
+    return nome
+      .split(" ")
+      .map((palavra, index) => {
+        const palavraMin = palavra.toLowerCase();
+        if (excecoes.includes(palavraMin) && index !== 0) {
+          return palavraMin;
+        }
+        return palavraMin.charAt(0).toUpperCase() + palavraMin.slice(1);
+      })
+      .join(" ");
+  }
+
+  document.getElementById("telefone").addEventListener("input", function (e) {
+    const input = e.target;
+    input.value = input.value.replace(/[^0-9+]/g, "");
+  });
+
+  document.getElementById("email").addEventListener("input", function (e) {
+    const input = e.target;
+    input.value = input.value.replace(/[^a-z-0-9._@]/g, ""); // Permitir apenas letras, números, pontos, sublinhados e o símbolo @
+  });
+
+  document.getElementById("foto").addEventListener("change", function () {
+    const preview = document.getElementById("preview");
+    const file = this.files[0];
+    if (file) {
+      preview.style.display = "block";
+      preview.src = URL.createObjectURL(file);
+    }
+  });
+
+  let morada = document.getElementById("morada");
+  let tag = document.getElementById("tag");
+  let foto = document.getElementById("foto");
+  
+  let alertaNovoContato = document.getElementById("alertaNovoContato");
+
+  let formNovoContato = document.getElementById("formNovoContato");
+  formNovoContato.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this)
+    fetch("../backend/novo_contato.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "sucesso") {
+          alertaNovoContato.classList.remove("alerta-erro");
+            alertaNovoContato.classList.add("alerta-sucesso");
+            alertaNovoContato.textContent = data.mensagem;
+            setTimeout(() => {
+              alertaNovoContato.textContent = "";
+              formNovoContato.reset()
+              document.getElementById("preview").style.display = "none";
+
+            }, 3000);
+
+        }else if(data.status === "erro"){
+          alertaNovoContato.classList.remove("alerta-sucesso");
+            alertaNovoContato.classList.add("alerta-erro");
+            alertaNovoContato.textContent = data.mensagem;
+        }
+
+      })
+      .catch((error) => {
+        console.error("Erro:", error);
+      });
+    
+
+
+  });
+
+
+}
+ novoContato(); // chamada funcao do novo contato
+
+
+//--------------------FIM NOVO CONTATO------------------------------
 
 
 

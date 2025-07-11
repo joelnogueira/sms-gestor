@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['logado'] = true;
 
 
-            echo json_encode(['status' => 'sucesso', 'mensagem' => 'A registar... aguarde.']);
+            echo json_encode(['status' => 'sucesso', 'mensagem' => 'A registrar... aguarde.']);
         } else {
             echo json_encode(['status' => 'erro_de_bd', 'mensagem' => 'Erro ao cadastrar usuário.']);
         }
