@@ -6,18 +6,18 @@ include_once 'config.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     //receber os dados do formulario
-    $email = $_POST['email'] ?? '';
+    $telefone = $_POST['telefone'] ?? '';
     $senha = $_POST['senha'] ?? '';
 
     //verificar se os campos estão preenchidos
-    if ( empty($email) || empty($senha)) {
+    if ( empty($telefone) || empty($senha)) {
         echo json_encode(['status' => 'erro_de_input', 'mensagem' => 'Preencha todos os campos.']);
         exit;
     };
 
     // Preparar a consulta para evitar SQL Injection
-    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = ?");
-    $stmt->execute([$email]);
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE telefone = ?");
+    $stmt->execute([$telefone]);
     if($stmt->rowCount() == 0){
         echo json_encode(['status'=> 'erro_de_existencia', 'mensagem' => 'Usuário não encontrado.']);
         exit;
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     // Verificar o usuario e a senha
     if (!$usuario || !password_verify($senha, $usuario['senha_hash'])) {
-        echo json_encode(['status'=> 'erro_de_dados', 'mensagem' => 'Email ou senha incorreta.']);
+        echo json_encode(['status'=> 'erro_de_dados', 'mensagem' => 'Telefone ou senha incorreta.']);
         exit;
     }
 

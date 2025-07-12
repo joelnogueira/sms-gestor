@@ -1,91 +1,96 @@
 function ativarValidarLogin() {
-  // Validar o campo de email para aceitar apenas letras, números, pontos, sublinhados e o símbolo @
-    document.getElementById("email").addEventListener("input", function (e) {
-        const input = e.target;
-        input.value = input.value.replace(/[^a-z-0-9._@]/g, ""); // Permitir apenas letras, números, pontos, sublinhados e o símbolo @
+  // Validar o campo de telefone para aceitar apenas números e o formato +2449xxxxxxx
+  document.getElementById("telefone").addEventListener("input", function (e) {
+    const input = e.target;
+    // Permite apenas 1 sinal de "+" no início e o resto apenas dígitos
+    input.value = input.value
+      .replace(/[^\d+]/g, "") // Remove tudo exceto dígitos e "+"
+      .replace(/(?!^)\+/g, "") // Remove "+" que não esteja no início
+      .slice(0, 15); // Limite para 15 caracteres (máximo internacional)
+  });
+
+  // Validar o campo de senha para aceitar apenas letras, números e caracteres especiais
+  document.getElementById("senha").addEventListener("input", function (e) {
+    const input = e.target;
+    input.value = input.value.replace(/[^a-zA-Z0-9!@#$%^&*()_+]/g, ""); // Permitir apenas letras, números e caracteres especiais
+  });
+
+  document.getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const form = document.getElementById("form");
+    const spinner = document.querySelector(".spinner");
+    const alerta = document.getElementById("alert");
+    alerta.style.display = "none";
+
+    const formData = new FormData(this);
+    fetch("../backend/validar_login.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "sucesso") {
+          // Exibir progress bar
+          const progressBar = document.getElementById("progress-bar");
+          const progressContainer =
+            document.getElementById("progress-container");
+          progressContainer.style.display = "block";
+
+          let progress = 0;
+          const intervalo = setInterval(() => {
+            progress += 10;
+            progressBar.style.width = progress + "%";
+
+            if (progress >= 100) {
+              clearInterval(intervalo);
+              window.location.href = "../frontend/painel_user.php";
+              progressContainer.style.display = "none";
+              form.reset(); // Limpar o formulário após o sucesso
+            }
+          }, 100); // tempo total: 1 segundo (100 * 10ms)
+        } else if (data.status === "erro_de_input") {
+          alerta.textContent = data.mensagem;
+          alerta.style.display = "block";
+          alerta.classList.add("erro");
+        } else if (data.status === "erro_de_existencia") {
+          alerta.textContent = data.mensagem;
+          alerta.style.display = "block";
+          alerta.classList.add("erro");
+        } else if (data.status === "erro_de_dados") {
+          alerta.textContent = data.mensagem;
+          alerta.style.display = "block";
+          alerta.classList.add("erro");
+        }
+      })
+      .catch((error) => {
+        alerta.textContent = "Erro de conexão com o servidor.";
+        alerta.style.display = "block";
+        alerta.classList.add("erro");
+        console.error("Erro:", error);
+      });
+  });
+
+  document
+    .querySelector(".imagem-vetor")
+    .addEventListener("mouseenter", function () {
+      let btnHidden = document.getElementById("btn-hidden");
+      btnHidden.style.display = "block";
+      btnHidden.addEventListener("click", function () {
+        let vetor = document.querySelector(".imagem-vetor");
+        let form = document.querySelector(".form-Box");
+        // Adiciona classe que esconde o vetor
+        vetor.classList.add("oculto");
+        // Centralizar o formulario
+        form.classList.add("centralizar-form");
+      });
     });
-
-    // Validar o campo de senha para aceitar apenas letras, números e caracteres especiais
-    document.getElementById("senha").addEventListener("input", function (e) {
-        const input = e.target;
-        input.value = input.value.replace(/[^a-zA-Z0-9!@#$%^&*()_+]/g, ""); // Permitir apenas letras, números e caracteres especiais
+  document
+    .querySelector(".imagem-vetor")
+    .addEventListener("mouseleave", function () {
+      let btnHidden = document.getElementById("btn-hidden");
+      btnHidden.style.display = "none";
     });
-
-    document.getElementById("form").addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const form = document.getElementById("form");
-        const spinner = document.querySelector(".spinner");
-        const alerta = document.getElementById("alert");
-        alerta.style.display = "none";
-        
-
-        const formData = new FormData(this);
-        fetch("../backend/validar_login.php", {
-        method: "POST",
-        body: formData,
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.status === "sucesso") {
-                // Exibir progress bar
-                const progressBar = document.getElementById("progress-bar");
-                const progressContainer = document.getElementById("progress-container");
-                progressContainer.style.display = "block";
-
-                let progress = 0;
-                const intervalo = setInterval(() => {
-                    progress += 10;
-                    progressBar.style.width = progress + "%";
-
-                    if (progress >= 100) {
-                        clearInterval(intervalo);
-                        window.location.href = "../frontend/painel_user.php";
-                        progressContainer.style.display = "none";
-                        form.reset(); // Limpar o formulário após o sucesso
-                    }
-                }, 100); // tempo total: 1 segundo (100 * 10ms)
-
-            } else if (data.status === "erro_de_input") {
-                    alerta.textContent = data.mensagem;
-                    alerta.style.display = "block";
-                    alerta.classList.add("erro");
-                } else if (data.status === "erro_de_existencia") {
-                    alerta.textContent = data.mensagem;
-                    alerta.style.display = "block";
-                    alerta.classList.add("erro");
-                } else if (data.status === "erro_de_dados") {
-                    alerta.textContent = data.mensagem;
-                    alerta.style.display = "block";
-                    alerta.classList.add("erro");
-                }
-        })
-        .catch((error) => {
-            alerta.textContent = "Erro de conexão com o servidor.";
-            alerta.style.display = "block";
-            alerta.classList.add("erro");
-            console.error("Erro:", error);
-        });
-    });
-
-    document.querySelector(".imagem-vetor").addEventListener("mouseenter", function () {
-        let btnHidden= document.getElementById('btn-hidden')
-        btnHidden.style.display = "block"; 
-        btnHidden.addEventListener("click", function () {
-            let vetor = document.querySelector(".imagem-vetor");
-            let form = document.querySelector(".form-Box");
-            // Adiciona classe que esconde o vetor
-            vetor.classList.add("oculto");
-            // Centralizar o formulario
-            form.classList.add("centralizar-form");
-        })
-    });
-    document.querySelector(".imagem-vetor").addEventListener("mouseleave", function () {
-        let btnHidden= document.getElementById('btn-hidden')
-        btnHidden.style.display = "none"; 
-    });
-
-
 }
 
 function ativarValidarCriarConta() {
@@ -129,10 +134,11 @@ function ativarValidarCriarConta() {
     // Validar o campo de telefone para aceitar apenas números e o formato +2449xxxxxxx
     document.getElementById("telefone").addEventListener("input", function (e) {
         const input = e.target;
-        input.value = input.value.replace(/[^0-9+]/g, ""); // Permitir apenas números e o sinal de mais
-        if (input.value.length > 13) {
-        input.value = input.value.slice(0, 13); // Limitar a 13 caracteres
-        }
+      // Permite apenas 1 sinal de "+" no início e o resto apenas dígitos
+        input.value = input.value
+            .replace(/[^\d+]/g, "") // Remove tudo exceto dígitos e "+"
+            .replace(/(?!^)\+/g, "") // Remove "+" que não esteja no início
+            .slice(0, 15); // Limite para 15 caracteres (máximo internacional)
     });
 
     document

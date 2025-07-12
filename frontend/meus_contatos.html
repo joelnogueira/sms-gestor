@@ -45,13 +45,68 @@
                 & td{font-size: var(--small-font-size); font-weight: 700; color: var(--azul);}
             }
         }
+        .lloading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  font-family: sans-serif;
+  color: #007BFF;
+}
+
+.sspinner {
+  border: 4px solid rgba(0,0,0,0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-left-color: #007BFF;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* .tabela-contatos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: sans-serif;
+  background: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.tabela-contatos th, .tabela-contatos td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.tabela-contatos tr:hover {
+  background-color: #e9f5ff;
+}
+
+.tabela-contatos th {
+  background-color: #007BFF;
+  color: white;
+  text-transform: uppercase;
+} */
+
 
 
 </style>
 
 
 <body>
-    <table class="table table-hover table-sm">
+
+  <div id="loading" class="lloading" style="display: none;" >
+    <div class="sspinner"></div>
+    <p>A carregar contatos...</p>
+  </div>
+
+    <!-- <table class="table table-hover table-sm" id="table">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -63,29 +118,23 @@
             <th scope="col">Criado em</th>
           </tr>
         </thead>
-        <tbody>
+        
+        <tbody id="tbody"></tbody>
+      </table> -->
+
+      <table class="tabela-contatos table table-hover table-sm" >
+        <thead>
           <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Tag</th>
+            <th scope="col">Morada</th>
+            <th scope="col">Criado em</th>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>Jacob</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Jacob</td>
-            <td>John</td>
-            <td>Doe</td>
-            <td>@social</td>
-          </tr>
-        </tbody>
+        </thead>
+        <tbody id="tbody"></tbody>
       </table>
 
 

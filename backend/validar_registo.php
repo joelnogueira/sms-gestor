@@ -11,12 +11,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $telefone = $_POST['telefone'] ?? '';
 
     // Verificar se os campos estão preenchidos
-    if (empty($nome) || empty($email) || empty($senha_hash)) {
-        echo json_encode(['status'=> 'erro_de_input', 'mensagem' => 'Preencha todos os campos.']);
+    if (empty($nome) || empty($senha_hash) || empty($telefone) ) {
+        echo json_encode(['status'=> 'erro_de_input', 'mensagem' => 'Campos vazío.']);
         exit;
     }
 
     // Preparar a consulta para evitar SQL Injection   
+    // Verificar se o numero já está cadastrado
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE telefone = ?");
+    $stmt->execute([$telefone]);
+
+    if ($stmt->rowCount() > 0) {
+        echo json_encode(['status' => 'erro_de_existencia', 'mensagem' => 'Telefone já cadastrado.']);
+        exit;
+    }
     // Verificar se o email já está cadastrado
     $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = ?");
     $stmt->execute([$email]);

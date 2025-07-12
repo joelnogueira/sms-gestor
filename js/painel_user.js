@@ -158,7 +158,40 @@ document.addEventListener("DOMContentLoaded", function () {
 //------------------------MEUS CONTATOS------------------------------------------
 
 function ativarMeusContatos() {
-  document.querySelector(".teste1").style.color = "blue";
+
+  const loading = document.getElementById("loading");
+  const tabela = document.getElementById("tbody");
+
+  // Mostrar loading
+  loading.style.display = "flex";
+
+
+  fetch("../backend/listar_contatos.php")
+    .then((response) => response.json())
+    .then((data) => {
+      // Esconder loading
+      loading.style.display = "none";
+
+
+      if (data.status === "sucesso") {
+        tabela.innerHTML = "";
+        let index = 1
+        data.contatos.forEach((contato) => {
+          let linha = `<tr>
+                <th scope="row">${index++}</th>
+                <td>${contato.nome}</td>
+                <td>${contato.telefone}</td>
+                <td>${contato.email}</td>
+                <td>${contato.tag}</td>
+                <td>${contato.morada}</td>
+                <td>${contato.data_criacao}</td>
+              </tr>`;
+          tabela.innerHTML += linha;
+        });
+      }
+    })
+    .catch((error) => console.error("Erro ao listar contatos:", error));
+
 }
 
 
@@ -270,7 +303,7 @@ function novoContato(){
     e.preventDefault();
 
     const formData = new FormData(this)
-    fetch("../backend/novo_contato.php", {
+    fetch("../backend/inserir_contato.php", {
       method: "POST",
       body: formData,
     })
@@ -308,9 +341,6 @@ function novoContato(){
 
 
 //--------------------FIM NOVO CONTATO------------------------------
-
-
-
 
 
 
