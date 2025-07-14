@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meus Contatos</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <style>
@@ -34,65 +36,73 @@
 
         }
 
-        table{
-            & thead{
-                & tr{
-                    font-size: var(--normal-font-size); 
-                    color: var(--azul)!important;
-                }
-            }
-            & tbody{
-                & td{font-size: var(--small-font-size); font-weight: 700; color: var(--azul);}
-            }
-        }
-        .lloading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 0;
-  font-family: sans-serif;
-  color: #007BFF;
+        
+.btn-acao{
+    font-size: .5rem;
 }
 
-.sspinner {
-  border: 4px solid rgba(0,0,0,0.1);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border-left-color: #007BFF;
-  animation: spin 1s linear infinite;
-  margin-bottom: 10px;
-}
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
+.card-header{
+  background-image:linear-gradient(to right, #007BFF,#3498db );
+  & h5{
+    font-family: var(--titulo);
+    font-size: var(--normal-font-size);
+  }
 }
-
-/* .tabela-contatos {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  font-family: sans-serif;
-  background: #f9f9f9;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-}
-
-.tabela-contatos th, .tabela-contatos td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-}
-
-.tabela-contatos tr:hover {
-  background-color: #e9f5ff;
-}
-
-.tabela-contatos th {
-  background-color: #007BFF;
-  color: white;
+table.contact-table thead {
   text-transform: uppercase;
-} */
+  letter-spacing: 0.5px;
+
+  & th{
+    color: var(--azul-fusco);
+    font-size: var(--small-font-size);
+    font-family: var(--titulo);
+    vertical-align: middle;
+    padding: 12px;
+  }
+}
+table.contact-table tbody{
+
+
+  & td{
+    color: var(--azul);
+    font-size: var(--texto);
+    font-size: var(--small-font-size);
+    font-weight: 700;
+    vertical-align: middle;
+    padding: 6px;
+  }
+}
+
+.contact-table tbody tr:hover {
+  background-color: #e9f2fb;
+  transition: background-color 0.3s ease;
+}
+
+
+.contact-table img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border:1px solid #ccc;
+}
+
+.tag {
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: #fff;
+}
+
+
+.btn-outline-primary:hover {
+  background-color: var(--azul-suave);
+  color: white;
+}
+
+.btn-outline-danger:hover {
+  background-color: var(--vermelho);
+  color: white;
+}
 
 
 
@@ -101,43 +111,41 @@
 
 <body>
 
-  <div id="loading" class="lloading" style="display: none;" >
-    <div class="sspinner"></div>
-    <p>A carregar contatos...</p>
-  </div>
-
-    <!-- <table class="table table-hover table-sm" id="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Telefone</th>
-            <th scope="col">Email</th>
-            <th scope="col">Tag</th>
-            <th scope="col">Morada</th>
-            <th scope="col">Criado em</th>
-          </tr>
-        </thead>
-        
-        <tbody id="tbody"></tbody>
-      </table> -->
-
-      <table class="tabela-contatos table table-hover table-sm" >
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Telefone</th>
-            <th scope="col">Email</th>
-            <th scope="col">Tag</th>
-            <th scope="col">Morada</th>
-            <th scope="col">Criado em</th>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
+  <div class="spinner" id="spinner-contato" style="display: none;">
+    <h1 style="color:var(--azul);">Carregando contatos...</h1>
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+</div>
 
 
+      <div class="container mt-2">
+        <div class="card shadow-lg">
+          <div class="card-header text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">📇 Lista de Contatos</h5>
+            <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i> Novo Contato</button>
+          </div>
+          <div class="card-body p-0">
+            <table class="table table-hove table-borderless mb-0 contact-table">
+              <thead class="table-info">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Telefone</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Tag</th>
+                  <th scope="col">Morada</th>
+                  <th scope="col">Criado em</th>
+                  <th scope="col">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tbody">
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
 </body>
 </html>

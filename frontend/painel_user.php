@@ -138,22 +138,28 @@ $primeiroNome = ucfirst($nomeDivido);
                             <div class="tag">
                                 <select name="tag" class="form-select form-select-sm" id="tag" aria-label="Small select example">
                                     <option selected>Escolha uma tag para seu contato</option>
-                                    <option value="amigo">Amigo</option>
-                                    <option value="familia">Família</option>
-                                    <option value="trabalho">Trabalho</option>
-                                    <option value="cliente">Cliente</option>
-                                    <option value="lead">Lead</option>
-                                    <option value="outro">Outro</option>
+                                    <option value="Amigo">Amigos</option>
+                                    <option value="Familia">Famíliares</option>
+                                    <option value="Trabalho">Trabalho</option>
+                                    <option value="Cliente">Clientes</option>
+                                    <option value="Lead">Lead</option>
+                                    <option value="Outro">Outros</option>
                                 </select>
                             </div>
                             <div class="file">
                                 <div class="mb-3">
                                     <label for="formFileSm" class="form-label">Adicionar Foto do Contato</label>
-                                    <input name="foto" id="foto" class="form-control form-control-sm" id="formFileSm" type="file" accept="image/*">
+                                    <div class="input-box ">
+                                        <input name="foto" id="foto" class="form-control form-control-sm" id="formFileSm" type="file" accept="image/*">
+                                    </div>
+                                    <!-- <button type="button" class="btn btn-danger btn-limpar-img" id="btn-limpar-img" data-bs-dismiss="modal">Limpar ficheiro</button> -->
                                 </div>
                             </div>
 
-                            <img id="preview" src="#" alt="Pré-visualização" style="display:none; width:180px; height:180px; border-radius:50%; object-fit:cover; border:2px solid var(--azul); margin:0 auto; ">
+                            <div class="img-box" id="img-box">
+                                <img id="preview" src="#" alt="Pré-visualização" style=" width:180px; height:180px; border-radius:50%; object-fit:cover; border:2px solid var(--azul); margin:0 auto; ">
+                                <abbr title="Apagar imagem"><i class="fas fa-trash-alt " id="btn-limpar-img"></i></abbr>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -189,12 +195,16 @@ $primeiroNome = ucfirst($nomeDivido);
                     <h1 id="hora"></h1>
                 </div>
                 <div class="btnBox">
-                    <div id="inicio" onclick="window.location.href='../index.html'">
-                        <i class="fa-solid fa-house"></i>
-                    </div>
-                    <div id="tema" onclick="mudar_tema()">
-                        <ion-icon name="moon"></ion-icon>
-                    </div>
+                    <abbr data-title="Página inicial">
+                        <div id="inicio" onclick="window.location.href='../index.html'">
+                            <i class="fa-solid fa-house"></i>
+                        </div>
+                    </abbr>
+                    <abbr data-title="Mudar tema">
+                        <div id="tema" onclick="mudar_tema()">
+                            <ion-icon name="moon"></ion-icon>
+                        </div>
+                    </abbr>
                 </div>
             </div>
         </nav>
@@ -271,19 +281,27 @@ $primeiroNome = ucfirst($nomeDivido);
                         <i class="fa-solid fa-magnifying-glass icon"></i>
                         <input type="text" name="procurar" id="procurar" placeholder="Procurar contatos, mensagens">
                     </div>
-                    <div class="mais-sms" data-bs-toggle="modal" data-bs-target="#exampleModalSMS">
-                        <i class="fa-solid fa-plus"></i>
-                    </div>
-                    <div class="mais-contato" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        <i class="fa-solid fa-user-plus icon-grande "></i>
-                    </div>
+                    <abbr data-title="Escrever mensagem">
+                        <div class="mais-sms" data-bs-toggle="modal" data-bs-target="#exampleModalSMS">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </abbr>
+                    <abbr data-title="Adicionar contato">
+                        <div class="mais-contato" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="fa-solid fa-user-plus icon-grande "></i>
+                        </div>
+                    </abbr>
                     <div class="notificacao">
-                        <div class="sms">
-                            <i class="fa-solid fa-comment-sms icon-grande "></i>
-                        </div>
-                        <div class=" sino ">
-                            <i class="fa-solid fa-bell icon-grande"></i>
-                        </div>
+                        <abbr data-title="Nova mensagem">
+                            <div class="sms">
+                                <i class="fa-solid fa-comment-sms icon-grande "></i>
+                            </div>
+                        </abbr>
+                        <abbr data-title="Nova notificação">
+                            <div class=" sino ">
+                                <i class="fa-solid fa-bell icon-grande"></i>
+                            </div>
+                        </abbr>
                     </div>
                     <div class="usuario-logado">
                         <div class="foto"></div>
@@ -367,12 +385,20 @@ $primeiroNome = ucfirst($nomeDivido);
                                         </div>
                                         <div class="opcoes">
                                             <ul>
-                                                <li><i class="fa-solid fa-paper-plane icon-pequeno"></i></li>
+                                                <abbr data-title="Enviar-lhe mensagem">
+                                                    <li><i class="fa-solid fa-paper-plane icon-pequeno"></i></li>
+                                                </abbr>
                                                 <!-- <li><i class="fa-solid fa-calendar-check icon-pequeno"></i></li> -->
                                                 <!-- <li><i class="fa-solid fa-star-half-stroke icon-pequeno"></i></li> -->
-                                                <li><i class="fa-solid fa-edit icon-pequeno"></i></li>
-                                                <li><i class="fa-solid fa-map-marker-alt icon-pequeno"></i></li>
-                                                <li><i class="fa-solid fa-phone icon-pequeno"></i></li>
+                                                <abbr data-title="Editar contato">
+                                                    <li><i class="fa-solid fa-edit icon-pequeno"></i></li>
+                                                </abbr>
+                                                <abbr data-title="Vêr morada">
+                                                    <li><i class="fa-solid fa-map-marker-alt icon-pequeno"></i></li>
+                                                </abbr>
+                                                <abbr data-title="Ligar">
+                                                    <li><i class="fa-solid fa-phone icon-pequeno"></i></li>
+                                                </abbr>
                                             </ul>
                                         </div>
                                     </div>
@@ -416,14 +442,14 @@ $primeiroNome = ucfirst($nomeDivido);
                                             <h1>Grupos de Contatos</h1>
                                             <div class="tags">
                                                 <div class="lado1">
+                                                    <div class="tag" style="background-color:#b143fa;"><a>Amigo</a></div>
                                                     <div class="tag" style="background-color:#f1734d;"><a>Família</a></div>
-                                                    <div class="tag" style="background-color:#4d81f1;"><a>Amigos</a></div>
                                                     <div class="tag" style="background-color:#4df1e3;"><a>Trabalho</a></div>
                                                 </div>
                                                 <div class="lado2">
-                                                    <div class="tag" style="background-color:#4df163;"><a>Clientes</a></div>
-                                                    <div class="tag" style="background-color:#cdf14d;"><a>Leads</a></div>
-                                                    <div class="tag" style="background-color:#f19c4d;"><a>Outros</a></div>
+                                                    <div class="tag" style="background-color:#4df163;"><a>Cliente</a></div>
+                                                    <div class="tag" style="background-color:#cdf14d;"><a>Lead</a></div>
+                                                    <div class="tag" style="background-color:#f19c4d;"><a>Outro</a></div>
                                                 </div>
                                             </div>
 
@@ -485,7 +511,9 @@ $primeiroNome = ucfirst($nomeDivido);
                                                         </h2>
                                                         <p>Amigo</p>
                                                         <div class="btn-enviar">
-                                                            <div class="enviar"><i class="fa-solid fa-plus"></i></div>
+                                                            <abbr data-title="Enviar-lhe mensagem">
+                                                                <div class="enviar"><i class="fa-solid fa-paper-plane "></i></div>
+                                                            </abbr>
                                                         </div>
                                                     </div>
 
@@ -503,7 +531,9 @@ $primeiroNome = ucfirst($nomeDivido);
                                                         </h2>
                                                         <p>Trabalho</p>
                                                         <div class="btn-enviar">
-                                                            <div class="enviar"><i class="fa-solid fa-plus"></i></div>
+                                                            <abbr data-title="Enviar-lhe mensagem">
+                                                                <div class="enviar"><i class="fa-solid fa-paper-plane "></i></div>
+                                                            </abbr>
                                                         </div>
                                                     </div>
 
@@ -521,7 +551,9 @@ $primeiroNome = ucfirst($nomeDivido);
                                                         </h2>
                                                         <p>Amigo</p>
                                                         <div class="btn-enviar">
-                                                            <div class="enviar"><i class="fa-solid fa-plus"></i></div>
+                                                            <abbr data-title="Enviar-lhe mensagem">
+                                                                <div class="enviar"><i class="fa-solid fa-paper-plane "></i></div>
+                                                            </abbr>
                                                         </div>
                                                     </div>
 
@@ -546,6 +578,7 @@ $primeiroNome = ucfirst($nomeDivido);
 
     </main>
 
+    <script src="../js/conexao.js"></script>
     <script src="../js/painel_user.js"></script>
     <script src="../js/sidebar.js"></script>
     <script src="../js/clima_atual_api.js"></script>

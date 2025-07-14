@@ -549,7 +549,6 @@
             color: var(--branco);
             background: var(--azul);
             box-shadow: 0 8px 32px 0rgba(54, 122, 248, 0.54);
-            backdrop-filter: blur(23px);
             -webkit-backdrop-filter: blur(23px);
             transition: .5s;
 
@@ -1143,3 +1142,31 @@
     }
 }
 
+/* Estilo do  abbr (Tooltips html)*/
+abbr[data-title] {
+    position: relative;
+  }
+
+  abbr[data-title]::after {
+    content: attr(data-title);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--azul-escuro);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 0.30rem;
+    font-size: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s;
+    z-index: 1000;
+    pointer-events: none;
+  }
+
+  abbr[data-title]:hover::after {
+    opacity: 1;
+    visibility: visible;
+  }

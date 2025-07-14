@@ -48,6 +48,26 @@
         margin-top:10px;
     }
     & label{ font-size:var(--normal-font-size); color:var(--azul); }
+    & .btn-limpar-img{
+        font-size:var(--small-font-size);
+        padding:3px;
+    }
+    & .img-box{
+        display:none; 
+        width:180px; 
+        height:180px; 
+        margin:0 auto;
+        position:relative;
+        & i{
+            position:absolute;
+            bottom:15px;
+            right:17px;
+            color:var(--azul);
+            transition:.1s ease;
+            &:hover{transform:scale(1.1);cursor:pointer; color:var(--vermelho);}
+            &:active{transform:scale(1);}
+        }
+    }
 }
 .modal-footer{
     display:flex;
