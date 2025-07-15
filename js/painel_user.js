@@ -159,6 +159,116 @@ function ativarMeusContatos() {
   // Mostrar spinnerContato
   spinnerContato.style.display = "block";
 
+  //Funcao para Renderizar Contato e deixa-lo retilizável
+  function renderizarContatos(listaContatos) {
+    tabela.innerHTML = "";
+
+    if (listaContatos.length === 0) {
+      tabela.innerHTML = `
+      <tr>
+        <td colspan="8" class="text-center text-muted">Lista vazia</td>
+      </tr>
+    `;
+      return;
+    }
+
+    listaContatos.forEach((contato) => {
+      const estrela =
+        contato.favorito == 1
+          ? `<i class="fas fa-star text-warning favorito-true"></i>` // favorita (cheia)
+          : `<i class="far fa-star text-muted favorito-false"></i>`; // não favorita (vazia)
+
+      let corTag = "";
+
+      switch (contato.tag) {
+        case "Amigo":
+          corTag = "#b143fa";
+          break;
+        case "Familia":
+          corTag = "#f1734d";
+          break;
+        case "Trabalho":
+          corTag = "#4df1e3";
+          break;
+        case "Cliente":
+          corTag = "#4df163";
+          break;
+        case "Lead":
+          corTag = "#cdf14d";
+          break;
+        case "Outro":
+          corTag = "#f19c4d";
+          break;
+      }
+      //https://i.pravatar.cc/40
+      const avatar = contato.foto_contato
+        ? `../${contato.foto_contato}`
+        : "../uploads/contatos/default_avatar.png";
+
+      let linha = `<tr>
+          <td><img src="${avatar}" class="rounded-circle " alt="avatar"></td> 
+          <td>${contato.nome}</td>
+          <td>${contato.telefone}</td>
+          <td>${contato.email}</td>
+          <td><span class="tag" style="background-color: ${corTag}">${contato.tag}</span></td>
+          <td>${contato.morada}</td>
+          <td>${contato.data_criacao}</td>
+          <td>
+              <abbr data-title="Favorito">
+                <button class="btn btn-sm btn-favorito" data-id="${contato.id}">
+                  ${estrela}
+                </button>
+              </abbr>
+              <abbr data-title="Agendar mensagem">
+                <button class="btn btn-sm btn-outline-secondary btn-acao">
+                  <i class="fas fa-calendar-check "></i>
+                </button>
+              </abbr>
+              <abbr data-title="Editar">
+                <button class="btn btn-sm btn-outline-primary btn-acao">
+                  <i class="fas fa-edit "></i>
+                </button>
+              </abbr>
+              <abbr data-title="Eliminar">
+                <button class="btn btn-sm btn-outline-danger btn-acao">
+                  <i class="fas fa-trash-alt "></i>
+                </button>
+              </abbr>
+              
+          </td>
+        </tr>`;
+      tabela.innerHTML += linha;
+    });
+
+    //...................ATUALIZAR CONTATOS FAVORITOS............................
+    
+    document.querySelectorAll(".btn-favorito").forEach((botao) => {
+      botao.addEventListener("click", function () {
+        const contatoId = this.getAttribute("data-id");
+
+        fetch("../backend/atualizar_favorito.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: contatoId }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.status === "sucesso") {
+              // Atualiza a visualização com o estado novo
+              if (mostrandoFavoritos) {
+                carregarFavoritos();
+              } else {
+                carregarTodosContatos();
+              }
+            }
+          });
+      });
+    });
+
+
+  }
+
+function carregarTodosContatos(){
   fetch("../backend/listar_contatos.php")
     .then((response) => response.json())
     .then((data) => {
@@ -166,60 +276,70 @@ function ativarMeusContatos() {
       spinnerContato.style.display = "none";
 
       if (data.status === "sucesso") {
-        tabela.innerHTML = "";
-        data.contatos.forEach((contato) => {
-          let corTag = "";
-
-          switch (contato.tag) {
-            case "Amigo":
-              corTag = "#b143fa";
-              break;
-            case "Familia":
-              corTag = "#f1734d";
-              break;
-            case "Trabalho":
-              corTag = "#4df1e3";
-              break;
-            case "Cliente":
-              corTag = "#4df163";
-              break;
-            case "Lead":
-              corTag = "#cdf14d";
-              break;
-            case "Outro":
-              corTag = "#f19c4d";
-              break;
-          } //https://i.pravatar.cc/40
-          const avatar = contato.foto_contato
-            ? `../${contato.foto_contato}`
-            : "../uploads/contatos/default_avatar.png";
-
-          let linha = `<tr>
-                <td><img src="${avatar}" class="rounded-circle " alt="avatar"></td> 
-                <td>${contato.nome}</td>
-                <td>${contato.telefone}</td>
-                <td>${contato.email}</td>
-                <td><span class="tag" style="background-color: ${corTag}">${contato.tag}</span></td>
-                <td>${contato.morada}</td>
-                <td>${contato.data_criacao}</td>
-                <td>
-                    <abbr data-title="Editar">
-                      <button class="btn btn-sm btn-outline-primary btn-acao">
-                        <i class="fas fa-edit "></i>
-                      </button>
-                    </abbr>
-                    <abbr data-title="Eliminar">
-                      <button class="btn btn-sm btn-outline-danger btn-acao">
-                        <i class="fas fa-trash-alt "></i>
-                      </button>
-                    </abbr>
-                </td>
-              </tr>`;
-          tabela.innerHTML += linha;
-        });
+        renderizarContatos(data.contatos);
       }
     })
     .catch((error) => console.error("Erro ao listar contatos:", error));
+
+}
+carregarTodosContatos();
+  //-----------------FILTRAR TAG - CONTATOS-----------------------------
+
+  const filtro = document.getElementById("filtro-tag");
+
+  function carregarContatos(tagSelecao = "") {
+    const url =
+      "../backend/filtrar_contatos.php?tagSelecao=" +
+      encodeURIComponent(tagSelecao);
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "sucesso") {
+          renderizarContatos(data.contatos);
+        }
+      })
+      .catch((error) => console.error("Erro ao listar contatos:", error));
+  }
+  filtro.addEventListener("change", function () {
+    carregarContatos(this.value); // adicionar o valor à filtragem
+  });
+
+
+  //...........BUSCAR CONTATOS FAVORITOS........................
+  
+  let mostrandoFavoritos = false; // estado inicial
+
+  const btnFavoritos = document.getElementById("btn-favoritos");
+
+  btnFavoritos.addEventListener("click", function () {
+    mostrandoFavoritos = !mostrandoFavoritos; // alterna o estado
+
+    if (mostrandoFavoritos) {
+      // Modo favoritos
+      carregarFavoritos();
+      btnFavoritos.textContent = "Mostrar todos";
+    } else {
+      // Modo todos
+      carregarTodosContatos();
+      btnFavoritos.textContent =  "Mostrar favoritos";
+    }
+  });
+  
+  function carregarFavoritos() {
+    fetch("../backend/contatos_favoritos.php")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "sucesso") {
+          renderizarContatos(data.contatos);
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao consultar contatos favoritos", error);
+      });
+  }
+
+
+
 }
 
 //------------------------NOVA MENSAGEM------------------------------------------

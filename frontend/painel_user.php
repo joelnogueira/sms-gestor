@@ -138,12 +138,12 @@ $primeiroNome = ucfirst($nomeDivido);
                             <div class="tag">
                                 <select name="tag" class="form-select form-select-sm" id="tag" aria-label="Small select example">
                                     <option selected>Escolha uma tag para seu contato</option>
-                                    <option value="Amigo">Amigos</option>
-                                    <option value="Familia">Famíliares</option>
+                                    <option value="Amigo">Amigo</option>
+                                    <option value="Familia">Família</option>
                                     <option value="Trabalho">Trabalho</option>
-                                    <option value="Cliente">Clientes</option>
+                                    <option value="Cliente">Cliente</option>
                                     <option value="Lead">Lead</option>
-                                    <option value="Outro">Outros</option>
+                                    <option value="Outro">Outro</option>
                                 </select>
                             </div>
                             <div class="file">
@@ -385,17 +385,18 @@ $primeiroNome = ucfirst($nomeDivido);
                                         </div>
                                         <div class="opcoes">
                                             <ul>
-                                                <abbr data-title="Enviar-lhe mensagem">
+                                                <abbr data-title="Enviar mensagem">
                                                     <li><i class="fa-solid fa-paper-plane icon-pequeno"></i></li>
                                                 </abbr>
-                                                <!-- <li><i class="fa-solid fa-calendar-check icon-pequeno"></i></li> -->
-                                                <!-- <li><i class="fa-solid fa-star-half-stroke icon-pequeno"></i></li> -->
-                                                <abbr data-title="Editar contato">
+                                                
+                                                <abbr data-title="Editar">
                                                     <li><i class="fa-solid fa-edit icon-pequeno"></i></li>
                                                 </abbr>
+
                                                 <abbr data-title="Vêr morada">
                                                     <li><i class="fa-solid fa-map-marker-alt icon-pequeno"></i></li>
                                                 </abbr>
+
                                                 <abbr data-title="Ligar">
                                                     <li><i class="fa-solid fa-phone icon-pequeno"></i></li>
                                                 </abbr>

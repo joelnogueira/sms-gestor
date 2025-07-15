@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Verificar se os campos estão preenchidos
     if (empty($nome) || empty($senha_hash) || empty($telefone) ) {
-        echo json_encode(['status'=> 'erro_de_input', 'mensagem' => 'Campos vazío.']);
+        echo json_encode(['status'=> 'erro_global', 'mensagem' => 'Campos vazío.']);
         exit;
     }
 
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute([$telefone]);
 
     if ($stmt->rowCount() > 0) {
-        echo json_encode(['status' => 'erro_de_existencia', 'mensagem' => 'Telefone já cadastrado.']);
+        echo json_encode(['status' => 'erro_global', 'mensagem' => 'Telefone já cadastrado.']);
         exit;
     }
     // Verificar se o email já está cadastrado
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute([$email]);
     
     if ($stmt->rowCount() > 0) {
-        echo json_encode(['status' => 'erro_de_existencia', 'mensagem' => 'Email já cadastrado.']);
+        echo json_encode(['status' => 'erro_de_email', 'mensagem' => 'Email já cadastrado.']);
         exit;
     } else{
         // Inserir o novo usuário no banco de dados
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             echo json_encode(['status' => 'sucesso', 'mensagem' => 'A registrar... aguarde.']);
         } else {
-            echo json_encode(['status' => 'erro_de_bd', 'mensagem' => 'Erro ao cadastrar usuário.']);
+            echo json_encode(['status' => 'erro_global', 'mensagem' => 'Erro ao cadastrar usuário.']);
         }
     }
 

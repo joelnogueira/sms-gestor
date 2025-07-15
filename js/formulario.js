@@ -199,18 +199,22 @@ function ativarValidarCriarConta() {
                     }
                 }, 300); // tempo total: 1 segundo (100 * 10ms)
 
-            } else if (data.status === "erro_de_input") {
+            } else if (data.status === "erro_global") {
                 alertaGlobal.textContent = data.mensagem;
                 alertaGlobal.style.display = "block";
                 alertaGlobal.classList.add("erro");
-            } else if (data.status === "erro_de_existencia") {
+            } else if (data.status === "erro_de_email") {
                 alertaEmail.textContent = data.mensagem;
                 alertaEmail.style.display = "block";
                 alertaEmail.classList.add("erro");
-            } else if (data.status === "erro_de_bd") {
+            } else if (data.status === "erro_de_contato") {
                 alertaGlobal.textContent = data.mensagem;
                 alertaGlobal.style.display = "block";
                 alertaGlobal.classList.add("erro");
+            }else if (data.status === "erro_global") {
+              alertaGlobal.textContent = data.mensagem;
+              alertaGlobal.style.display = "block";
+              alertaGlobal.classList.add("erro");
             }
         });
     });

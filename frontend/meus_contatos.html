@@ -28,6 +28,7 @@
             --fundo-claro: #ccc;
             --branco: #FFFFFF;
             --amarelo: #fde24f;
+            --amarelo-warning: #FFC107;
             --verde-escuro: #43A047;
             --verde-claro: #2ecc71;
             --vermelho: #e74c3c;
@@ -41,6 +42,73 @@
     font-size: .5rem;
 }
 
+.favoritoBox{
+  display: flex;
+  gap:5px;
+  font-family: var(--titulo); 
+  font-size: var(--small-font-size); 
+  height:30px;
+
+  & select{
+    width: 130px;
+    font-weight: 600; 
+    color:var(--azul-fusco);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    &:hover{
+      cursor:pointer;
+    }
+  
+    & option{
+      color:var(--branco);
+      font-size: var(--small-font-size);
+      font-family: var(--texto);
+      font-weight: 700;
+      padding:5px;
+    }
+    & option:nth-child(1){
+      background-color: var(--azul-escuro);
+    }
+    & option:nth-child(2){
+      background-color: #b143fa;
+    }
+    & option:nth-child(3){
+      background-color: #f1734d;
+    }
+    & option:nth-child(4){
+      background-color: #4df1e3;
+    }
+    & option:nth-child(5){
+      background-color: #4df163;
+    }
+    & option:nth-child(6){
+      background-color: #cdf14d;
+    }
+    & option:nth-child(7){
+      background-color: #f19c4d;
+    }
+  } 
+  & button{
+    width: 150px;
+    font-weight: 500; 
+    color:var(--azul-fusco); 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:3px;
+  }
+  
+}
+
+.favorito-true:active {
+    transform:rotate(-360deg);
+    transition: .9s ease-out;
+  }
+.favorito-false:active {
+    transform:rotate(360deg);
+    transition: .9s ease-out;
+  }
 
 .card-header{
   background-image:linear-gradient(to right, #007BFF,#3498db );
@@ -121,12 +189,23 @@ table.contact-table tbody{
 
       <div class="container mt-2">
         <div class="card shadow-lg">
-          <div class="card-header text-white d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">📇 Lista de Contatos</h5>
-            <button class="btn btn-light btn-sm"><i class="fas fa-user-plus"></i> Novo Contato</button>
+          <div class="card-header text-white d-block justify-content-between d-sm-flex align-items-center">
+            <h5 class="mb-2"><i class="fa-solid fa-address-book"></i> Lista de Contatos</h5>
+            <div class="favoritoBox">
+              <select id="filtro-tag"  class="form-select form-select-sm" aria-label="Small select example">
+                <option value="" selected> Tags </option>
+                <option value="Amigo">Amigos</option>
+                <option value="Família">Familiares</option>
+                <option value="Trabalho">Trabalho</option>
+                <option value="Cliente">Clientes</option>
+                <option value="Lead">Leads</option>
+                <option value="Outro">Outros</option>
+              </select>
+                <button id="btn-favoritos" class="btn btn-light btn-sm">Mostrar favoritos</button>
+            </div>
           </div>
           <div class="card-body p-0">
-            <table class="table table-hove table-borderless mb-0 contact-table">
+            <table class="table table-hover table-borderless mb-0 contact-table">
               <thead class="table-info">
                 <tr>
                   <th scope="col"></th>
@@ -146,6 +225,8 @@ table.contact-table tbody{
           </div>
         </div>
       </div>
+
+
 
 </body>
 </html>
