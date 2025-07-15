@@ -31,7 +31,7 @@ function alertaDaConexao() {
         banner.style.display = "none"; // esconde após 3 segundos
       }, 3000);
     } else {
-      banner.textContent = "⚠️ Upss Você está offline. Algumas funções podem não funcionar.";
+      banner.textContent = "⚠️ Upss! Você está offline. Algumas funções podem não funcionar.";
       banner.style.backgroundColor = "#dc3545"; // vermelho
       banner.style.display = "block";
     }

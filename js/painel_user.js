@@ -1,4 +1,19 @@
 
+// document.addEventListener("DOMContentLoaded", function () {
+//   const toastElList = [].slice.call(document.querySelectorAll('.toast'));
+//   toastElList.forEach(function (toastEl) {
+//     const toast = new bootstrap.Toast(toastEl);
+//     toast.show();
+//   });
+// });
+// document.getElementById("liveToastBtn").addEventListener("click", function () {
+//   const toastEl = document.getElementById("liveToast"); 
+//   const toast = new bootstrap.Toast(toastEl);
+//   toast.show();
+// });
+
+
+
 // ----------------------MODAL-------------------------------
 // script do madal do log-out
 document.addEventListener("DOMContentLoaded", function () {
@@ -81,6 +96,7 @@ if (hora < 12) {
 
 //..............................................
 
+
 //TypeWriter effect. efeito de digitação
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -148,6 +164,11 @@ document.addEventListener("DOMContentLoaded", function () {
   digitar();
 });
 
+
+
+
+
+
 // -----------------------FIM PAINEL------------------------------
 
 //------------------------MEUS CONTATOS------------------------------------------
@@ -175,8 +196,8 @@ function ativarMeusContatos() {
     listaContatos.forEach((contato) => {
       const estrela =
         contato.favorito == 1
-          ? `<i class="fas fa-star text-warning favorito-true"></i>` // favorita (cheia)
-          : `<i class="far fa-star text-muted favorito-false"></i>`; // não favorita (vazia)
+          ? `<i class="estrela fas fa-star text-warning favorito-true"></i>` // favorita (cheia)
+          : `<i class="estrela far fa-star text-muted favorito-false"></i>`; // não favorita (vazia)
 
       let corTag = "";
 
@@ -246,6 +267,22 @@ function ativarMeusContatos() {
       botao.addEventListener("click", function () {
         const contatoId = this.getAttribute("data-id");
 
+          const icone = this.querySelector(".estrela");
+          const toastTexto = document.getElementById("toastTexto");
+
+          let foiFavoritado = !icone.classList.contains("fas"); // se não tinha 'fas', vai virar favorito
+
+          // Definir o texto do Toast-favorito
+              toastTexto.textContent = foiFavoritado
+                ? "Contato adicionado aos favoritos! "
+                : "Contato removido dos favoritos. ";
+
+              // Mostrar toast-favorito
+              const toastElement = document.getElementById('liveToast');
+              const toast = new bootstrap.Toast(toastElement);
+              toast.show();
+              
+
         fetch("../backend/atualizar_favorito.php", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -257,10 +294,13 @@ function ativarMeusContatos() {
               // Atualiza a visualização com o estado novo
               if (mostrandoFavoritos) {
                 carregarFavoritos();
+
               } else {
                 carregarTodosContatos();
               }
+
             }
+
           });
       });
     });
@@ -287,7 +327,7 @@ carregarTodosContatos();
 
   const filtro = document.getElementById("filtro-tag");
 
-  function carregarContatos(tagSelecao = "") {
+  function carregarContatosDaTag(tagSelecao = "") {
     const url =
       "../backend/filtrar_contatos.php?tagSelecao=" +
       encodeURIComponent(tagSelecao);
@@ -301,9 +341,37 @@ carregarTodosContatos();
       .catch((error) => console.error("Erro ao listar contatos:", error));
   }
   filtro.addEventListener("change", function () {
-    carregarContatos(this.value); // adicionar o valor à filtragem
+    carregarContatosDaTag(this.value); // adicionar o valor à filtragem
   });
 
+
+  //-----------------PESQUISAR - CONTATOS-----------------------------
+
+  
+
+ function pesquisarContatos() {
+  const termo = document.getElementById("pesquisarId").value.trim();
+
+  if (!termo) {
+    carregarTodosContatos(); // Se o campo estiver vazio, carrega todos
+    return;
+  }
+
+  const url = `../backend/pesquisar_contatos.php?termo=${encodeURIComponent(termo)}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.status === "sucesso") {
+        renderizarContatos(data.contatos);
+      } else {
+        console.warn("Pesquisa sem resultados.");
+      }
+    })
+    .catch((error) => console.error("Erro ao pesquisar contatos:", error));
+}
+document.getElementById("pesquisarId").addEventListener("keyup", function () {
+  pesquisarContatos();
+});
 
   //...........BUSCAR CONTATOS FAVORITOS........................
   

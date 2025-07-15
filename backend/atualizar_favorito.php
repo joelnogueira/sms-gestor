@@ -16,5 +16,4 @@ if (!$usuarioId || !$contatoId) {
 // Alternar o valor do favorito
 $stmt = $pdo->prepare("UPDATE contatos SET favorito = NOT favorito WHERE id = ? AND id_usuario = ?");
 $stmt->execute([$contatoId, $usuarioId]);
-
 echo json_encode(['status' => 'sucesso']);

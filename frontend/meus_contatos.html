@@ -49,6 +49,37 @@
   font-size: var(--small-font-size); 
   height:30px;
 
+  & .procurar {
+        position: relative;
+        width: 210px;
+
+        & .icon {
+            position: absolute;
+            top: 35%;
+            left: 4%;
+            color: var(--fundo-claro);
+            font-size: 12px;
+        }
+
+        & input {
+            width: 100%;
+            height: 100%;
+            border-radius: 14px;
+            border: var(--normal-font-size);
+            padding: 8px 8px 8px 28px;
+            font-size: 0.7rem;
+            font-weight:600;
+            font-family: var(--texto);
+            background-color: var(--branco);
+
+            &:focus {
+                outline: none;
+
+            }
+        }
+    }
+
+
   & select{
     width: 130px;
     font-weight: 600; 
@@ -190,8 +221,12 @@ table.contact-table tbody{
       <div class="container mt-2">
         <div class="card shadow-lg">
           <div class="card-header text-white d-block justify-content-between d-sm-flex align-items-center">
-            <h5 class="mb-2"><i class="fa-solid fa-address-book"></i> Lista de Contatos</h5>
+            <h5 class="mb-2" ><i class="fa-solid fa-address-book"></i> Lista de Contatos</h5>
             <div class="favoritoBox">
+              <div class="procurar">
+                  <i class="fa-solid fa-magnifying-glass icon"></i>
+                  <input type="text" name="pesquisar" id="pesquisarId" placeholder="Pesquisar por nome ou contato">
+              </div>
               <select id="filtro-tag"  class="form-select form-select-sm" aria-label="Small select example">
                 <option value="" selected> Tags </option>
                 <option value="Amigo">Amigos</option>

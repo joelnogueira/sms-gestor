@@ -94,7 +94,6 @@ $primeiroNome = ucfirst($nomeDivido);
             </div>
         </div>
     </div>
-
     <!-- FIM -->
 
 
@@ -176,8 +175,26 @@ $primeiroNome = ucfirst($nomeDivido);
             </form>
         </div>
     </div>
-
     <!-- FIM -->
+
+<!--  MODAL TOAST-->
+    <!-- TOAST PARA CONTATO ADICIONADO AO FAVORITO -->
+      <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast bg-light text-primary" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-primary text-light"  id="imgContato">
+            <strong class="me-auto" style="font-family:var(--titulo);">Favorito</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" style="display:flex; align-items:center;">
+                <span id="toastTexto"> </span>
+                <button class="btn btn-sm ">
+                    <i class="fas fa-star text-warning "></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+<!--  FIM  TOAST-->
 
 
 
@@ -277,10 +294,7 @@ $primeiroNome = ucfirst($nomeDivido);
             <!-- a tela de conteudo -->
             <div class="tela-principal">
                 <header>
-                    <div class="procurar">
-                        <i class="fa-solid fa-magnifying-glass icon"></i>
-                        <input type="text" name="procurar" id="procurar" placeholder="Procurar contatos, mensagens">
-                    </div>
+                    
                     <abbr data-title="Escrever mensagem">
                         <div class="mais-sms" data-bs-toggle="modal" data-bs-target="#exampleModalSMS">
                             <i class="fa-solid fa-plus"></i>
