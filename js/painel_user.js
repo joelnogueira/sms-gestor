@@ -234,24 +234,28 @@ function ativarMeusContatos() {
           <td><span class="tag" style="background-color: ${corTag}">${contato.tag}</span></td>
           <td>${contato.morada}</td>
           <td>${contato.data_criacao}</td>
-          <td>
+          <td >
               <abbr data-title="Favorito">
-                <button class="btn btn-sm btn-favorito" data-id="${contato.id}">
+                <button class="btn btn-sm mb-1 btn-favorito" 
+                data-id="${contato.id}"
+                data-nome="${contato.nome}">
                   ${estrela}
                 </button>
               </abbr>
               <abbr data-title="Agendar mensagem">
-                <button class="btn btn-sm btn-outline-secondary btn-acao">
+                <button class="btn btn-sm mb-1 btn-outline-secondary btn-acao">
                   <i class="fas fa-calendar-check "></i>
                 </button>
               </abbr>
               <abbr data-title="Editar">
-                <button class="btn btn-sm btn-outline-primary btn-acao">
+                <button class="btn btn-sm mb-1 btn-outline-primary btn-acao">
                   <i class="fas fa-edit "></i>
                 </button>
               </abbr>
               <abbr data-title="Eliminar">
-                <button class="btn btn-sm btn-outline-danger btn-acao">
+                <button class="btn btn-sm mb-1 btn-outline-danger btn-acao btn-eliminar" 
+                data-id="${contato.id}"
+                data-nome="${contato.nome}">
                   <i class="fas fa-trash-alt "></i>
                 </button>
               </abbr>
@@ -266,6 +270,9 @@ function ativarMeusContatos() {
     document.querySelectorAll(".btn-favorito").forEach((botao) => {
       botao.addEventListener("click", function () {
         const contatoId = this.getAttribute("data-id");
+        const contatoNome = this.getAttribute("data-nome")
+        const nomeCurto = contatoNome.slice(0, 12); // Limitar o nome a 12 caracteres
+        
 
           const icone = this.querySelector(".estrela");
           const toastTexto = document.getElementById("toastTexto");
@@ -273,9 +280,9 @@ function ativarMeusContatos() {
           let foiFavoritado = !icone.classList.contains("fas"); // se não tinha 'fas', vai virar favorito
 
           // Definir o texto do Toast-favorito
-              toastTexto.textContent = foiFavoritado
-                ? "Contato adicionado aos favoritos! "
-                : "Contato removido dos favoritos. ";
+              toastTexto.innerHTML = foiFavoritado
+                ? `${nomeCurto.italics()} ... Adicionado aos favoritos!`
+                : `${nomeCurto.italics()} ... Removido dos favoritos. `;
 
               // Mostrar toast-favorito
               const toastElement = document.getElementById('liveToast');
@@ -406,7 +413,35 @@ document.getElementById("pesquisarId").addEventListener("keyup", function () {
       });
   }
 
+  //.............ELIMINAR CONTANTO.......................
+  //...usar médo de delegação..............
+    document.addEventListener('click', function(e){
+      if(e.target.closest(".btn-eliminar")){
+        const botao = e.target.closest(".btn-eliminar")
+        const contatoId = botao.getAttribute("data-id")
+        const contatoNome = botao.getAttribute("data-nome")
+        const nomeCurto = contatoNome.slice(0, 12); // Limitar o nome a 12 caracteres
 
+        const toastTexto= document.getElementById("toateTextoElim")
+        toastTexto.innerHTML = `${nomeCurto.italics()} ... Foi eliminado da lista!`;
+
+         // Mostrar toast-elimar contato
+              const toastEliminarContato = document.getElementById(
+                "toastEliminarContato"
+              );
+              const toast = new bootstrap.Toast(toastEliminarContato);
+              toast.show();
+
+        const url = `../backend/eliminar_contato.php?contatoId=${contatoId}`
+        fetch(url)
+        .then((res)=> res.json())
+        .then((data)=>{
+          if(data.status === "sucesso"){
+            carregarTodosContatos()
+          }
+        })
+      }
+    })
 
 }
 

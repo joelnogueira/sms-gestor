@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" || $_SERVER['REQUEST_METHOD'] === "GET
 
     try {
 
-        $stmt = $pdo->prepare(" SELECT * FROM contatos WHERE id_usuario = ? ");
+        $stmt = $pdo->prepare(" SELECT * FROM contatos WHERE id_usuario = ? ORDER BY nome ");
         $stmt->execute([$usuarioId]);
         $contatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

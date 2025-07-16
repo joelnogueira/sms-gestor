@@ -15,10 +15,10 @@ if( $_SERVER['REQUEST_METHOD'] === "GET" ){
 
 
     if ($filtroTag === "") {
-        $stmt = $pdo->prepare("SELECT * FROM contatos WHERE id_usuario = ?");
+        $stmt = $pdo->prepare("SELECT * FROM contatos WHERE id_usuario = ? ORDER BY nome ");
         $stmt->execute([$usuarioId]);
     } else {
-        $stmt = $pdo->prepare("SELECT * FROM contatos WHERE id_usuario = ? AND tag = ?");
+        $stmt = $pdo->prepare("SELECT * FROM contatos WHERE id_usuario = ? AND tag = ? ORDER BY nome ");
         $stmt->execute([$usuarioId, $filtroTag]);
 
     }

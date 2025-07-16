@@ -177,15 +177,15 @@ $primeiroNome = ucfirst($nomeDivido);
     </div>
     <!-- FIM -->
 
-<!--  MODAL TOAST-->
+    <!--  MODAL TOAST-->
     <!-- TOAST PARA CONTATO ADICIONADO AO FAVORITO -->
-      <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="liveToast" class="toast bg-light text-primary" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header bg-primary text-light"  id="imgContato">
-            <strong class="me-auto" style="font-family:var(--titulo);">Favorito</strong>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+            <div class="toast-header bg-primary text-light" id="imgContato">
+                <strong class="me-auto" style="font-family:var(--titulo);">Favorito</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-            <div class="toast-body" style="display:flex; align-items:center;">
+            <div class="toast-body" style="display:flex; align-items:center; font-size:var(--small-font-size); font-weight:700;">
                 <span id="toastTexto"> </span>
                 <button class="btn btn-sm ">
                     <i class="fas fa-star text-warning "></i>
@@ -194,7 +194,23 @@ $primeiroNome = ucfirst($nomeDivido);
         </div>
     </div>
 
-<!--  FIM  TOAST-->
+    <!--  FIM  TOAST-->
+    <!--  MODAL TOAST-->
+    <!-- TOAST PARA CONTATO ADICIONADO AO FAVORITO -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toastEliminarContato" class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body bg-light text-primary" style="font-family:var(--texto); font-size:var(--small-font-size); font-weight:700;">
+                    <span id="toateTextoElim"></span>
+                </div>
+                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <!--  FIM  TOAST-->
+
 
 
 
@@ -294,7 +310,7 @@ $primeiroNome = ucfirst($nomeDivido);
             <!-- a tela de conteudo -->
             <div class="tela-principal">
                 <header>
-                    
+
                     <abbr data-title="Escrever mensagem">
                         <div class="mais-sms" data-bs-toggle="modal" data-bs-target="#exampleModalSMS">
                             <i class="fa-solid fa-plus"></i>
@@ -402,7 +418,7 @@ $primeiroNome = ucfirst($nomeDivido);
                                                 <abbr data-title="Enviar mensagem">
                                                     <li><i class="fa-solid fa-paper-plane icon-pequeno"></i></li>
                                                 </abbr>
-                                                
+
                                                 <abbr data-title="Editar">
                                                     <li><i class="fa-solid fa-edit icon-pequeno"></i></li>
                                                 </abbr>

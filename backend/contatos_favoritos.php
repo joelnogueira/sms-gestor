@@ -12,7 +12,7 @@ if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
 
 $usuarioId = $_SESSION['id'];
 
-$stmt= $pdo->prepare( "SELECT * FROM contatos WHERE id_usuario = ? AND favorito = ? ");
+$stmt= $pdo->prepare("SELECT * FROM contatos WHERE id_usuario = ? AND favorito = ? ORDER BY nome ");
 $stmt->execute([$usuarioId, 1]);
 
 $contatos = $stmt->fetchAll(PDO::FETCH_ASSOC);

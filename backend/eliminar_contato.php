@@ -9,14 +9,12 @@ if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {
     exit;
 }
 
-$pesquisa = isset($_GET['termo']) ? $_GET['termo'] : '';
+$contatoId = isset($_GET['contatoId']) ? $_GET['contatoId'] : '';
 $usuarioId = $_SESSION['id'];
 
-// Prepara a pesquisa com LIKE
-$pesquisa = "%$pesquisa%";  //
 
-$stmt = $pdo->prepare("SELECT * FROM contatos WHERE (nome LIKE ? OR telefone LIKE ? ) AND id_usuario = ? ORDER BY nome ");
-$stmt->execute([$pesquisa, $pesquisa, $usuarioId]);
+$stmt = $pdo->prepare("DELETE FROM contatos WHERE id = ? AND id_usuario = ?");
+$stmt->execute([$contatoId, $usuarioId]);
 
 $contatos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
