@@ -59,6 +59,7 @@
         margin:0 auto;
         position:relative;
         & i{
+            display:none; 
             position:absolute;
             bottom:15px;
             right:17px;

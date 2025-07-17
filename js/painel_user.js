@@ -248,7 +248,15 @@ function ativarMeusContatos() {
                 </button>
               </abbr>
               <abbr data-title="Editar">
-                <button class="btn btn-sm mb-1 btn-outline-primary btn-acao">
+                <button class="btn btn-sm mb-1 btn-outline-primary btn-acao btn-editar"
+                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                data-id="${contato.id}"
+                data-nome="${contato.nome}"
+                data-telefone="${contato.telefone}"
+                data-email="${contato.email}"
+                data-morada="${contato.morada}"
+                data-tag="${contato.tag}"
+                data-foto="${avatar}">
                   <i class="fas fa-edit "></i>
                 </button>
               </abbr>
@@ -330,9 +338,10 @@ function carregarTodosContatos(){
 
 }
 carregarTodosContatos();
-  //-----------------FILTRAR TAG - CONTATOS-----------------------------
 
-  const filtro = document.getElementById("filtro-tag");
+//-----------------FILTRAR TAG - CONTATOS-----------------------------
+
+const filtro = document.getElementById("filtro-tag");
 
   function carregarContatosDaTag(tagSelecao = "") {
     const url =
@@ -354,9 +363,8 @@ carregarTodosContatos();
 
   //-----------------PESQUISAR - CONTATOS-----------------------------
 
-  
 
- function pesquisarContatos() {
+function pesquisarContatos() {
   const termo = document.getElementById("pesquisarId").value.trim();
 
   if (!termo) {
@@ -380,7 +388,7 @@ document.getElementById("pesquisarId").addEventListener("keyup", function () {
   pesquisarContatos();
 });
 
-  //...........BUSCAR CONTATOS FAVORITOS........................
+  //........... BUSCAR CONTATOS FAVORITOS ........................
   
   let mostrandoFavoritos = false; // estado inicial
 
@@ -414,7 +422,7 @@ document.getElementById("pesquisarId").addEventListener("keyup", function () {
   }
 
   //.............ELIMINAR CONTANTO.......................
-  //...usar médo de delegação..............
+  //...usar método de delegação..............
     document.addEventListener('click', function(e){
       if(e.target.closest(".btn-eliminar")){
         const botao = e.target.closest(".btn-eliminar")
@@ -488,6 +496,17 @@ function carregarPage(url) {
 }
 
 //--------------------NOVO CONTATO------------------------------
+
+//...........Limpor o form para adionar novo contato..................
+
+document.addEventListener('click', function(e){
+  if(e.target.closest(".mais-contato") || e.target.closest(".resetarFormContato")){
+    // Limpar o formulário
+    document.getElementById("formNovoContato").reset();
+    document.getElementById("id").value=""; // Limpar o campo de ID
+  }
+})
+
 function novoContato() {
   //Validar o campo de nome para aceitar apenas letras, espaços e caracteres especiais
   document.getElementById("nome").addEventListener("input", function (e) {
@@ -498,10 +517,7 @@ function novoContato() {
     // 1. Remover caracteres inválidos (aceita letras, espaços, hífens e apóstrofos)
     nome = nome.replace(/[^a-zA-ZÀ-ÿ\s'-]/g, "");
 
-    // 2. Substituir múltiplos espaços por apenas um
-    // nome = nome.replace(/\s+/g, " ").trim();
-
-    // 3. Capitalizar cada palavra (com exceções)
+    // 2. Capitalizar cada palavra (com exceções)
     const excecoes = ["da", "de", "do", "das", "dos", "e"];
     return nome
       .split(" ")
@@ -528,30 +544,38 @@ function novoContato() {
     input.value = input.value.replace(/[^a-z-0-9._@]/g, ""); // Permitir apenas letras, números, pontos, sublinhados e o símbolo @
   });
 
-  const fotoContato = document.getElementById("foto");
-  fotoContato.addEventListener("change", function () {
-    const preview = document.getElementById("preview");
-    const imgBox = document.getElementById("img-box");
-    const file = this.files[0];
-    if (file) {
-      imgBox.style.display = "block";
-      preview.src = URL.createObjectURL(file);
-    } else {
-      imgBox.style.display = "none";
-      preview.src = "";
-    }
-  });
-  document
-    .getElementById("btn-limpar-img")
-    .addEventListener("click", function () {
-      fotoContato.value = "";
-      fotoContato.dispatchEvent(new Event("change"));
+  
+    const fotoContato = document.getElementById("foto");
+    fotoContato.addEventListener("change", function () {
+      const preview = document.getElementById("preview");
+      const imgBox = document.getElementById("img-box");
+      const btnLimpar = document.getElementById("btn-limpar-img");
+
+      const file = this.files[0];
+      if (file) {
+        btnLimpar.style.display = "block";
+        imgBox.style.display = "block";
+        preview.src = URL.createObjectURL(file);
+      } else {
+        btnLimpar.style.display = "none";
+        imgBox.style.display = "none";
+        preview.src = "";
+      }
     });
+
+    document
+      .getElementById("btn-limpar-img")
+      .addEventListener("click", function () {
+        fotoContato.value = "";
+        fotoContato.dispatchEvent(new Event("change"));
+      });
 
   document.getElementById("morada").addEventListener("input", function (e) {
     const input = e.target;
-    input.value = formatarNome(input.value); // função  da validação de capitalização
+    input.value = input.value; // função  da validação de capitalização
+      
   });
+  
 
   let tag = document.getElementById("tag");
   let foto = document.getElementById("foto");
@@ -576,7 +600,10 @@ function novoContato() {
           setTimeout(() => {
             alertaNovoContato.textContent = "";
             this.reset();
-            document.getElementById("preview").style.display = "none";
+            document.getElementById("id").value = ""; // Limpar o campo de ID
+            document.getElementById("preview").src = "";
+            document.getElementById("btn-limpar-img").style.display = "none";
+            document.getElementById("img-box").style.display = "none";
           }, 3000);
 
           ativarMeusContatos(); // 💡 chama novamente a função que atualiza a tabela
@@ -592,6 +619,39 @@ function novoContato() {
   });
 }
 novoContato(); // chamada funcao do novo contato
+
+document.addEventListener('click', function(e){
+  if(e.target.closest(".btn-editar")){
+    let btn = e.target.closest(".btn-editar");
+
+    // logica para editar contatos
+    let fromEditar = document.getElementById("formNovoContato");
+    document.getElementById("id").value = btn.getAttribute("data-id");
+    document.getElementById("nome").value = btn.getAttribute("data-nome");
+    document.getElementById("telefone").value = btn.getAttribute("data-telefone");
+    document.getElementById("email").value = btn.getAttribute("data-email");
+    document.getElementById("morada").value = btn.getAttribute("data-morada");
+    document.getElementById("tag").value = btn.getAttribute("data-tag");
+
+    // Mostrar a foto do contato
+    const nomeFoto = btn.getAttribute("data-foto");
+    const preview = document.getElementById("preview");
+    const imgBox = document.getElementById("img-box");
+    const btnLimpar = document.getElementById("btn-limpar-img");
+
+    if (nomeFoto) {
+      btnLimpar.style.display = "block";
+      imgBox.style.display = "block";
+      preview.src = nomeFoto; // Define a imagem do contato
+    } else {
+      btnLimpar.style.display = "none";
+      imgBox.style.display = "none";
+      preview.src = "";
+    }
+  }
+})
+
+
 
 //--------------------FIM NOVO CONTATO------------------------------
 

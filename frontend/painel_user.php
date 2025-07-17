@@ -101,14 +101,15 @@ $primeiroNome = ucfirst($nomeDivido);
     <!-- Modal -->
     <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form action="../backend/novo_contato.php" method="post" id="formNovoContato">
+            <form action="../backend/novo_contato.php" method="post" id="formNovoContato" enctype="multipart/form-data">
 
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Novo Contato</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar Contato</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <input type="hidden" name="id" id="id"> <!-- input Escondido para editar os contatos -->
                         <div class="input-box">
                             <div class="nome">
                                 <div class="input-group input-group-sm mb-3">
@@ -167,7 +168,7 @@ $primeiroNome = ucfirst($nomeDivido);
                         </div>
                         <div>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button name="submit" class="btn btn-ok">Adicionar</button>
+                            <button name="submit"  class="btn btn-ok">Adicionar</button>
                         </div>
                     </div>
                 </div>
@@ -196,11 +197,11 @@ $primeiroNome = ucfirst($nomeDivido);
 
     <!--  FIM  TOAST-->
     <!--  MODAL TOAST-->
-    <!-- TOAST PARA CONTATO ADICIONADO AO FAVORITO -->
+    <!-- TOAST PARA CONTATO ELIMINADO -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="toastEliminarContato" class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+        <div id="toastEliminarContato" class="toast bg-danger align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
-                <div class="toast-body bg-light text-primary" style="font-family:var(--texto); font-size:var(--small-font-size); font-weight:700;">
+                <div class="toast-body  text-light" style="font-family:var(--texto); font-size:var(--small-font-size); font-weight:700;">
                     <span id="toateTextoElim"></span>
                 </div>
                 <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -317,7 +318,7 @@ $primeiroNome = ucfirst($nomeDivido);
                         </div>
                     </abbr>
                     <abbr data-title="Adicionar contato">
-                        <div class="mais-contato" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <div class="mais-contato resetarFormContato" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="fa-solid fa-user-plus icon-grande "></i>
                         </div>
                     </abbr>
